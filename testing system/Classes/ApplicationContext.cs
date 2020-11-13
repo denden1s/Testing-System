@@ -30,10 +30,7 @@ namespace testing_system
         /// </summary>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=testing_system_db;Trusted_Connection=True;");
-            }
+            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=testing_system_db;Trusted_Connection=True;");
         }
 
         /// <summary>
@@ -44,7 +41,7 @@ namespace testing_system
             //первичные ключи
             modelBuilder.Entity<User>().HasKey(u => u.Id);
             modelBuilder.Entity<StatisticOfTest>().HasKey(k => new { k.UserID, k.TestID, k.Attempt });
-            modelBuilder.Entity<TestName>().HasKey(u => u.TestID);
+            modelBuilder.Entity<TestName>().HasKey(u =>  u.TestID);
             modelBuilder.Entity<QuestionAndAnswer>().HasKey(k => new { k.TestID, k.QuestionID });
             modelBuilder.Entity<QuestionName>().HasKey(k => new { k.QuestionID, k.TestID });
             modelBuilder.Entity<UserAnswer>().HasKey(k => new { k.TestID, k.QuestionID, k.UserID, k.Attempt });

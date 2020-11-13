@@ -101,7 +101,12 @@ namespace testing_system
             if(themeIsSelect)
                 TBInformation.Visible = false;
             else
-                TBInformation.Visible = true; 
+            {
+                TBInformation.Visible = true;
+
+                TBInformation.LoadFile(MathematicInfo[comboBox1.SelectedIndex].ThemeContent);
+            }
+                
         }
 
         /// <summary>
@@ -157,6 +162,14 @@ namespace testing_system
                 this.Hide();
                 testForm.Show();
             }
+        }
+
+        private void FormForUser_HelpButtonClicked(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            string fbPath = Application.StartupPath;
+            string fname = "NewProject1.chm";
+            string filename = fbPath + @"\" + fname;
+            Help.ShowHelp(this, filename, HelpNavigator.Find, "");
         }
     }
 }

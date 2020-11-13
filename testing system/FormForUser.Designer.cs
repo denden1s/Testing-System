@@ -51,7 +51,7 @@
             this.выйтиИзУчетнойЗаписиToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1145, 38);
+            this.menuStrip1.Size = new System.Drawing.Size(916, 28);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -150,9 +150,11 @@
             this.HelpButton = true;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FormForUser";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Меню пользователя";
+            this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.FormForUser_HelpButtonClicked);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormForUser_FormClosed);
             this.Load += new System.EventHandler(this.FormForUser_Load);
             this.menuStrip1.ResumeLayout(false);
