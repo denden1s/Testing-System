@@ -1,11 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using testing_system.Classes;
 using testing_system.Classes.ForDataBase;
@@ -14,15 +9,20 @@ namespace testing_system
 {
     public partial class FormForUser : Form
     {
-        private Form1 form1;
-        private bool themeIsSelect; //пока не помню для чего
+        //Необходимо для перехода к окну авторизации 
+        private AuthorizationForm form1;
 
-        //необходима для хранения информации об авторизованном пользователе
+        //Необходимо для перехода к онку с тестом
+        private TestingForm testForm;
+
+        //Необходимо для проверки какой режим используется в программе
+        private bool themeIsSelect; 
+
+        //Необходимо для хранения информации об авторизованном пользователе
         private User authorizedUser;
 
-        //необходима для преобразования информации из БД
-        private List<TestName> TestName;
-        private StatisticOfTest statistic;
+        //Необходимо для преобразования информации из БД
+        private List<TestName> TestNames;
         private List<InformationAboutMath> MathematicInfo;
 
 
@@ -41,34 +41,9 @@ namespace testing_system
         public FormForUser(User user)
         {
             MathematicInfo = new List<InformationAboutMath>();
+            TestNames = new List<TestName>();
             InitializeComponent();
-            authorizedUser = user;
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                if(db.testNames.Count() != 0)
-                {
-                    foreach (TestName tn in db.testNames)
-                    {
-                        TestName.Add(new TestName(tn.Name));
-                    }
-                }
-                if (db.informationAboutMaths.Count() > 0)
-                {
-                    foreach (InformationAboutMath info in db.informationAboutMaths)
-                    {
-                        MathematicInfo.Add(info);
-                        comboBox1.Items.Add(info.Name);
-                    }
-                }
-                //if (db.informationAboutMaths.Count() != 0)
-                //{
-                //    foreach (InformationAboutMath info in db.informationAboutMaths)
-                //    {
-                //        MathematicInfo.Add(new InformationAboutMath(info.ThemeID, info.Name, info.ThemeContent));
-                //    }
-                //}
-                //else MessageBox.Show("Информация отсутствует");
-            }
+            authorizedUser = user;         
         }
 
         /// <summary>
@@ -76,7 +51,6 @@ namespace testing_system
         /// </summary>
         private void FormForUser_Load(object sender, EventArgs e)
         {
-            //TBInformation.LoadFile("sha2562.rtf");
             themeIsSelect = false;
             comboBox1.Visible = false;
             LabelForComboBox.Visible = false;
@@ -89,7 +63,7 @@ namespace testing_system
         /// </summary>
         private void выйтиИзУчетнойЗаписиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            form1 = new Form1();
+            form1 = new AuthorizationForm();
             form1.Show();
             this.Visible = false;
         }
@@ -99,10 +73,24 @@ namespace testing_system
         /// </summary>
         private void учебнаяИнформацияToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            themeIsSelect = false;
             ChooseElement.Visible = false;
+            ButtonForTest.Visible = false;
             LabelForComboBox.Visible = true;
             comboBox1.Visible = true;
-            ButtonForTest.Visible = false;
+            TBInformation.Visible = true;
+            TBInformation.Clear();
+            comboBox1.Items.Clear();
+            comboBox1.Text = "";
+            using (ApplicationContext db = new ApplicationContext())
+                if (db.informationAboutMaths.Count() > 0)
+                {
+                    foreach (InformationAboutMath info in db.informationAboutMaths)
+                    {
+                        MathematicInfo.Add(info);
+                        comboBox1.Items.Add(info.Name);
+                    }
+                }
         }
 
         /// <summary>
@@ -110,20 +98,10 @@ namespace testing_system
         /// </summary>
         private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
         {
-            TBInformation.Visible = true;
-            //если нужна проверка по индексам
-            //int removeUserID = Users[listBoxUserId].Id;
-            //var item = db.Users.Find(removeUserID);
-            //if (item != null)
-            //{
-            //    db.Users.Remove(item);
-            //    Users.Remove(Users[listBoxUserId]);
-            //    db.SaveChanges();
-            //    EditInformation.Items.RemoveAt(listBoxUserId);
-            if (MathematicInfo[comboBox1.SelectedIndex].ThemeContent.Contains(".rtf"))
-                TBInformation.LoadFile(MathematicInfo[comboBox1.SelectedIndex].ThemeContent);
+            if(themeIsSelect)
+                TBInformation.Visible = false;
             else
-                TBInformation.Text = MathematicInfo[comboBox1.SelectedIndex].ThemeContent;
+                TBInformation.Visible = true; 
         }
 
         /// <summary>
@@ -140,10 +118,32 @@ namespace testing_system
         private void тестыToolStripMenuItem_Click(object sender, EventArgs e)
         {
             TBInformation.Visible = false;
+            themeIsSelect = true;
             ChooseElement.Visible = false;
             LabelForComboBox.Visible = true;
             comboBox1.Visible = true;
             ButtonForTest.Visible = true;
+            comboBox1.Items.Clear();
+            comboBox1.Text = "";
+            SystemFunctions.GetList(TestNames);
+            foreach (TestName item in TestNames)
+            {
+                comboBox1.Items.Add(item.Name);
+            }
+        }
+
+        /// <summary>
+        /// Необходим для отображения статистики тестов
+        /// </summary>
+        private void статистикаТестовToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            TBInformation.Visible = true;
+            themeIsSelect = false;
+            ChooseElement.Visible = false;
+            LabelForComboBox.Visible = false;
+            comboBox1.Visible = false;
+            ButtonForTest.Visible = false;
+            TBInformation.Text = SystemFunctions.ViewStatisticOfTests(authorizedUser);
         }
 
         /// <summary>
@@ -151,7 +151,12 @@ namespace testing_system
         /// </summary>
         private void ButtonForTest_Click(object sender, EventArgs e)
         {
-
+            if (comboBox1.SelectedIndex != -1)
+            {
+                testForm = new TestingForm(authorizedUser, TestNames[comboBox1.SelectedIndex]);
+                this.Hide();
+                testForm.Show();
+            }
         }
     }
 }

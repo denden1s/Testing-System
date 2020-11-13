@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace testing_system.Classes.ForDataBase
+﻿namespace testing_system.Classes.ForDataBase
 {
     class InformationAboutMath
     {
@@ -20,8 +14,6 @@ namespace testing_system.Classes.ForDataBase
             : this(_name, _content)
         {
             ThemeID = _themeID;
-            //Name = _name;
-            //ThemeContent = _content;
         }
         public int ThemeID { get; set; }
         public string Name { get; set; }

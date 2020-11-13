@@ -79,6 +79,7 @@
             this.ListOfThemes = new System.Windows.Forms.ListBox();
             this.label11 = new System.Windows.Forms.Label();
             this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
+            this.helpProvider1 = new System.Windows.Forms.HelpProvider();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -95,14 +96,14 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.menuStrip1.Size = new System.Drawing.Size(1282, 27);
+            this.menuStrip1.Size = new System.Drawing.Size(1282, 30);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // выйтиИзУчётнойЗаписиToolStripMenuItem
             // 
             this.выйтиИзУчётнойЗаписиToolStripMenuItem.Name = "выйтиИзУчётнойЗаписиToolStripMenuItem";
-            this.выйтиИзУчётнойЗаписиToolStripMenuItem.Size = new System.Drawing.Size(198, 23);
+            this.выйтиИзУчётнойЗаписиToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
             this.выйтиИзУчётнойЗаписиToolStripMenuItem.Text = "Выйти из учётной записи";
             this.выйтиИзУчётнойЗаписиToolStripMenuItem.Click += new System.EventHandler(this.выйтиИзУчётнойЗаписиToolStripMenuItem_Click);
             // 
@@ -133,6 +134,7 @@
             this.EnterUserName.Name = "EnterUserName";
             this.EnterUserName.Size = new System.Drawing.Size(245, 22);
             this.EnterUserName.TabIndex = 4;
+            this.EnterUserName.TextChanged += new System.EventHandler(this.EnterUserName_TextChanged);
             // 
             // EnterPassword
             // 
@@ -140,6 +142,7 @@
             this.EnterPassword.Name = "EnterPassword";
             this.EnterPassword.Size = new System.Drawing.Size(245, 22);
             this.EnterPassword.TabIndex = 6;
+            this.EnterPassword.TextChanged += new System.EventHandler(this.EnterPassword_TextChanged);
             // 
             // label2
             // 
@@ -153,7 +156,7 @@
             // 
             // EditUserButton
             // 
-            this.EditUserButton.BackColor = System.Drawing.Color.Black;
+            this.EditUserButton.BackColor = System.Drawing.Color.DarkGray;
             this.EditUserButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.EditUserButton.Location = new System.Drawing.Point(327, 320);
             this.EditUserButton.Name = "EditUserButton";
@@ -346,7 +349,7 @@
             // 
             // EditQuestionButton
             // 
-            this.EditQuestionButton.BackColor = System.Drawing.Color.Black;
+            this.EditQuestionButton.BackColor = System.Drawing.Color.DarkGray;
             this.EditQuestionButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.EditQuestionButton.Location = new System.Drawing.Point(432, 331);
             this.EditQuestionButton.Name = "EditQuestionButton";
@@ -362,6 +365,7 @@
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(184, 27);
             this.textBox4.TabIndex = 33;
+            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // textBox3
             // 
@@ -370,6 +374,7 @@
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(175, 27);
             this.textBox3.TabIndex = 32;
+            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // textBox2
             // 
@@ -378,6 +383,7 @@
             this.textBox2.Name = "textBox2";
             this.textBox2.Size = new System.Drawing.Size(184, 27);
             this.textBox2.TabIndex = 31;
+            this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label6
             // 
@@ -396,6 +402,7 @@
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(175, 27);
             this.textBox1.TabIndex = 29;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label10
             // 
@@ -425,6 +432,7 @@
             this.EnterQuestion.Name = "EnterQuestion";
             this.EnterQuestion.Size = new System.Drawing.Size(336, 39);
             this.EnterQuestion.TabIndex = 26;
+            this.EnterQuestion.TextChanged += new System.EventHandler(this.EnterQuestion_TextChanged);
             // 
             // ListOfQuestions
             // 
@@ -483,7 +491,7 @@
             // 
             // EditTestButton
             // 
-            this.EditTestButton.BackColor = System.Drawing.Color.Black;
+            this.EditTestButton.BackColor = System.Drawing.Color.DarkGray;
             this.EditTestButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.EditTestButton.Location = new System.Drawing.Point(271, 110);
             this.EditTestButton.Name = "EditTestButton";
@@ -547,19 +555,19 @@
             // 
             // AddThemeButton
             // 
-            this.AddThemeButton.BackColor = System.Drawing.Color.LimeGreen;
+            this.AddThemeButton.BackColor = System.Drawing.Color.DarkGray;
             this.AddThemeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.AddThemeButton.Location = new System.Drawing.Point(261, 128);
             this.AddThemeButton.Name = "AddThemeButton";
             this.AddThemeButton.Size = new System.Drawing.Size(261, 35);
             this.AddThemeButton.TabIndex = 37;
-            this.AddThemeButton.Text = "Загрузить из файла";
+            this.AddThemeButton.Text = "Добавить";
             this.AddThemeButton.UseVisualStyleBackColor = false;
             this.AddThemeButton.Click += new System.EventHandler(this.AddThemeButton_Click);
             // 
             // EditThemeButton
             // 
-            this.EditThemeButton.BackColor = System.Drawing.Color.Black;
+            this.EditThemeButton.BackColor = System.Drawing.Color.DarkGray;
             this.EditThemeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.EditThemeButton.Location = new System.Drawing.Point(258, 180);
             this.EditThemeButton.Name = "EditThemeButton";
@@ -663,11 +671,15 @@
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.OperatingMode);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.HelpButton = true;
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "FormForAdmin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Меню администратора";
+            this.TopMost = true;
+            this.HelpButtonClicked += new System.ComponentModel.CancelEventHandler(this.FormForAdmin_HelpButtonClicked);
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.FormForAdmin_FormClosed);
             this.Load += new System.EventHandler(this.FormForAdmin_Load);
             this.menuStrip1.ResumeLayout(false);
@@ -738,5 +750,6 @@
         private System.Windows.Forms.Label EnumQuestions;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Panel panel4;
+        private System.Windows.Forms.HelpProvider helpProvider1;
     }
 }

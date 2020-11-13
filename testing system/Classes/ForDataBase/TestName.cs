@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace testing_system.Classes
+﻿namespace testing_system.Classes
 {
-    class TestName
+    public class TestName
     {
         public TestName()
         { }
 
-        public TestName( string _name)
+        public TestName(string _name)
         {
             Name = _name;
+        }
+        public TestName (string _name, int _testId):this(_name)
+        {
+            TestID = _testId;
         }
         public int TestID { get; set; }
         public string Name { get; set; }

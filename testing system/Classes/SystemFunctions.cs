@@ -2,14 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using System.Text;
-using System.Threading.Tasks;
 using testing_system.Classes.ForDataBase;
-using System.Security.Cryptography;
 
 namespace testing_system.Classes
 {
-    static class SystemFunctions //класс для рефакторинга и переноса в него всех основных функций системы
+    static class SystemFunctions
     {
         /// <summary>
         /// Необходим для сортировки пользователей
@@ -42,11 +39,10 @@ namespace testing_system.Classes
         }
 
         /// <summary>
-        /// Необходим для заполнения списка пользователей и их отображения
+        /// Необходим для передачи списка пользователей на отображение
         /// </summary>
         /// <param name="_usersList">Список пользователей</param>
-        /// <param name="_listBoxOfUsers">Элемент управления для отображения списка</param>
-        public static void Show(List<User> _usersList, ListBox _listBoxOfUsers)
+        public static void GetList(List<User> _usersList)
         {
             try
             {
@@ -63,10 +59,6 @@ namespace testing_system.Classes
                     if (_usersList.Count > 0)
                     {
                         Sort(_usersList);
-                        foreach (User u in _usersList)
-                        {
-                            _listBoxOfUsers.Items.Add(u.Name);
-                        }
                     }
                 }
                 GC.Collect();
@@ -81,8 +73,7 @@ namespace testing_system.Classes
         /// Необходим для заполнения списка информации из ТБ и его отображения
         /// </summary>
         /// <param name="_mathInfoList">Список тем из ТБ</param>
-        /// <param name="_listBoxOfThemes">Элемент управления для отображения списка</param>
-        public static void Show(List<InformationAboutMath> _mathInfoList, ListBox _listBoxOfThemes)
+        public static void GetList(List<InformationAboutMath> _mathInfoList)
         {
             try
             {
@@ -98,10 +89,6 @@ namespace testing_system.Classes
                     if (_mathInfoList.Count > 0)
                     {
                         Sort(_mathInfoList);
-                        foreach (InformationAboutMath u in _mathInfoList)
-                        {
-                            _listBoxOfThemes.Items.Add(u.Name);
-                        }
                     }
                 }
                 GC.Collect();
@@ -116,8 +103,7 @@ namespace testing_system.Classes
         /// Необходим для заполнения списка тестов и его отображения
         /// </summary>
         /// <param name="_testsList">Список тестов</param>
-        /// <param name="_listBoxOfTests">Элемент управления для отображения списка</param>
-        public static void Show(List<TestName> _testsList, ListBox _listBoxOfTests)
+        public static void GetList(List<TestName> _testsList)
         {
             try
             {
@@ -127,16 +113,13 @@ namespace testing_system.Classes
                     {
                         foreach (TestName i in db.testNames)
                         {
-                            _testsList.Add(new TestName(i.Name));
+                            _testsList.Add(new TestName(i.Name, i.TestID));
                         }
                     }
                     if (_testsList.Count > 0)
                     {
                         Sort(_testsList);
-                        foreach (TestName t in _testsList)
-                        {
-                            _listBoxOfTests.Items.Add(t.Name);
-                        }
+
                     }
                 }
                 GC.Collect();
@@ -152,10 +135,8 @@ namespace testing_system.Classes
         /// </summary>
         /// <param name="_questionsList">Список вопросов</param>
         /// <param name="_testName">Наименование теста</param>
-        /// <param name="_listBoxOfQuestions">Элемент управления для отожраения списка вопросов</param>
         /// <param name="_qNamesList">Список наименований вопросов</param>
-        public static void Show(List<QuestionAndAnswer> _questionsList, string _testName,
-            ListBox _listBoxOfQuestions, List<QuestionName> _qNamesList)
+        public static void GetList(List<QuestionAndAnswer> _questionsList, string _testName, List<QuestionName> _qNamesList)
         {
             try
             {
@@ -170,7 +151,6 @@ namespace testing_system.Classes
                                     select b;
                     _questionsList.Clear();
                     _qNamesList.Clear();
-                    _listBoxOfQuestions.Items.Clear();
                     foreach (var q in questions)
                     {
                         _questionsList.Add(q);
@@ -181,7 +161,6 @@ namespace testing_system.Classes
                         var qName = db.questionNames.Find(q.QuestionID, q.TestID);
                         QuestionName questionName = new QuestionName();
                         questionName = (QuestionName)qName;
-                        _listBoxOfQuestions.Items.Add(questionName.Name);
                         _qNamesList.Add(qName);
                     }
                 }
@@ -241,9 +220,8 @@ namespace testing_system.Classes
         /// <param name="_usersList">Список пользователей</param>
         /// <param name="_nameFromTextBox">Введённое имя</param>
         /// <param name="_passwordFromTextBox">Введённый пароль</param>
-        /// <param name="_listBoxOfUsers">Элемент для отображения</param>
         public static void Add(List<User> _usersList,TextBox _nameFromTextBox,
-            TextBox _passwordFromTextBox, ListBox _listBoxOfUsers)
+            TextBox _passwordFromTextBox)
         {
             try
             {
@@ -259,11 +237,6 @@ namespace testing_system.Classes
                             db.SaveChanges();
                             _usersList.Add(user);
                             Sort(_usersList);
-                            _listBoxOfUsers.Items.Clear();
-                            foreach (User u in _usersList)
-                            {
-                                _listBoxOfUsers.Items.Add(u.Name);
-                            }
                             MessageBox.Show("Пользователь добавлен");
                             ClearTextBox(_nameFromTextBox, _passwordFromTextBox);
                         }
@@ -287,9 +260,8 @@ namespace testing_system.Classes
         /// <param name="_mathInfoList">Список имеющейся информации из ТБ</param>
         /// <param name="_themeNameFromTextBox">Введенное имя темы</param>
         /// <param name="_content">Наполнение темы контентом</param>
-        /// <param name="_listBoxOfThemes">Элемент для отображения </param>
         public static void Add(List<InformationAboutMath> _mathInfoList, TextBox _themeNameFromTextBox,
-            string _content, ListBox _listBoxOfThemes)
+            string _content)
         {
             try
             {
@@ -305,10 +277,10 @@ namespace testing_system.Classes
                             db.informationAboutMaths.Add(math);
                             db.SaveChanges();
                             _mathInfoList.Add(math);
-                            _listBoxOfThemes.Items.Clear();
-                            SystemFunctions.Show(_mathInfoList, _listBoxOfThemes);
+                            SystemFunctions.GetList(_mathInfoList);
                             ClearTextBox(_themeNameFromTextBox);
                             _content = "";
+                            MessageBox.Show("Информация успешно добавлена.");
                         }
                         else
                             MessageBox.Show("Тема не соответствует требованиям");
@@ -357,36 +329,31 @@ namespace testing_system.Classes
                         bool findTest = db.testNames.Any(i => i.Name == _enteredName);
                         if (!findTest)
                         {
-                            if (_enteredName.Length > 6)
-                            {
 
-                                db.testNames.Add(new TestName(_enteredName));
-                                _testNamesList.Add(new TestName(_enteredName));
-                                db.SaveChanges();
-                                var testId = from b in db.testNames
-                                             where b.Name == _enteredName
-                                             select b;
-                                if ((testId != null) && (db.testNames.Count() > 0))
-                                    id = testId.Single().TestID;
-                                else
-                                    id = 0;
-                                
-                                for (int i = 0; i < 10; i++)
-                                {
-                                    QuestionAndAnswer question = new QuestionAndAnswer(id, i, _questions[i, 0],
-                                        _questions[i, 1], _questions[i, 2], _questions[i, 3]);
-                                    db.questionNames.Add(new QuestionName(id, i, _questionName[i]));
-                                    _questionsList.Add(question);
-                                    db.questionAndAnswers.Add(question);
-                                }
-                                db.SaveChanges();
-                                MessageBox.Show("Тест успешно добавлен");
-                            }
+                            db.testNames.Add(new TestName(_enteredName));
+                            _testNamesList.Add(new TestName(_enteredName));
+                            db.SaveChanges();
+                            var testId = from b in db.testNames
+                                            where b.Name == _enteredName
+                                            select b;
+                            if ((testId != null) && (db.testNames.Count() > 0))
+                                id = testId.Single().TestID;
                             else
-                                MessageBox.Show("Имя занято");
+                                id = 0;
+                                
+                            for (int i = 0; i < 10; i++)
+                            {
+                                QuestionAndAnswer question = new QuestionAndAnswer(id, i, _questions[i, 0],
+                                    _questions[i, 1], _questions[i, 2], _questions[i, 3]);
+                                db.questionNames.Add(new QuestionName(id, i, _questionName[i]));
+                                _questionsList.Add(question);
+                                db.questionAndAnswers.Add(question);
+                            }
+                            db.SaveChanges();
+                            MessageBox.Show("Тест успешно добавлен");
                         }
                         else
-                            MessageBox.Show("Теcn не соответствует требованиям");
+                            MessageBox.Show("Имя занято");                            
                     }
                 }
                 else
@@ -408,16 +375,15 @@ namespace testing_system.Classes
         /// <param name="_testId">Уникальный идентификатор теста</param>
         /// <param name="_questionId">Уникальный идентификатор вопроса</param>
         /// <param name="_answers">Ответы на вопрос</param>
-        /// <param name="_listBoxOfQuestions">Элемент управления для отображения списка вопросов</param>
         public static void Add(List<QuestionAndAnswer> _questionsList,
-            string _qName,int _testId, int _questionId, string[] _answers, ListBox _listBoxOfQuestions)
+            string _qName,int _testId, int _questionId, string[] _answers)
         {
             try
             {
                 int newQuestionId = _questionId + 1;
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    var findQName = db.questionNames.FirstOrDefault(i => i.Name == _qName);
+                    var findQName = db.questionNames.FirstOrDefault(i => i.Name == _qName && i.TestID == _testId);
                     if (findQName == null)
                     {
                         QuestionAndAnswer nQuestion = new QuestionAndAnswer(_testId, newQuestionId, _answers[0],
@@ -426,11 +392,6 @@ namespace testing_system.Classes
                         db.questionAndAnswers.Add(nQuestion);
                         db.questionNames.Add(new QuestionName(_testId, newQuestionId, _qName));
                         db.SaveChanges();
-                        _listBoxOfQuestions.Items.Clear();
-                        foreach (QuestionName qn in db.questionNames)
-                        {
-                            _listBoxOfQuestions.Items.Add(qn.Name);
-                        }
                         MessageBox.Show("Вопрос добавлен");
                     }
                     else
@@ -445,12 +406,32 @@ namespace testing_system.Classes
         }
 
         /// <summary>
+        /// Необходим для сохранения статистики прохождения теста
+        /// </summary>
+        /// <param name="_info">вся информация о статистике</param>
+        public static void SaveUserStatistic(params int[] _info)
+        {
+            try
+            {
+                StatisticOfTest statistic = new StatisticOfTest(_info[0], _info[1], _info[2], _info[3]);
+                using (ApplicationContext db = new ApplicationContext())
+                {
+                    db.statisticOfTests.Add(statistic);
+                    db.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        /// <summary>
         /// Необходим для удаления пользователя из системы
         /// </summary>
         /// <param name="_usersList">Список имеющихся пользователей</param>
         /// <param name="_listBoxId">Уникальный идентификатор выбранного пользователя</param>
-        /// <param name="_listBoxOfUsers">Элемент управления для отображения пользователей</param>
-        public static void Remove(List<User> _usersList, int _listBoxId, ListBox _listBoxOfUsers)
+        public static void Remove(List<User> _usersList, int _listBoxId)
         {
             try
             {
@@ -474,7 +455,6 @@ namespace testing_system.Classes
                                 db.Users.Remove(item);
                                 _usersList.Remove(_usersList[_listBoxId]);
                                 db.SaveChanges();
-                                _listBoxOfUsers.Items.RemoveAt(_listBoxId);
                             }
                         }
                         MessageBox.Show("Пользователь удален");
@@ -495,43 +475,32 @@ namespace testing_system.Classes
         /// </summary>
         /// <param name="_MathInfoList">Список математических тем</param>
         /// <param name="_listBoxId">Уникальный идентификатор выбранной темы</param>
-        /// <param name="_listBoxOfThemes">Элемент управления для отображения тем</param>
-        public static void Remove(List<InformationAboutMath> _MathInfoList, int _listBoxId, ListBox _listBoxOfThemes)
+        public static void Remove(List<InformationAboutMath> _MathInfoList, int _listBoxId)
         {
             try
             {
-                if ((_listBoxOfThemes.Items.Count > 0) && (_listBoxOfThemes.SelectedIndex != -1))
+                using (ApplicationContext db = new ApplicationContext())
                 {
-                    using (ApplicationContext db = new ApplicationContext())
+                    DialogResult themeResult = MessageBox.Show($"Вы действительно хотите удалить " +
+                            $"тему {_MathInfoList[_listBoxId].Name}",
+                            "Удаление темы!",
+                            MessageBoxButtons.YesNo,
+                            MessageBoxIcon.Information,
+                            MessageBoxDefaultButton.Button2,
+                            MessageBoxOptions.DefaultDesktopOnly);
+                    if (themeResult == DialogResult.Yes)
                     {
-                        DialogResult themeResult = MessageBox.Show($"Вы действительно хотите удалить " +
-                                $"тему {_MathInfoList[_listBoxId].Name}",
-                                        "Удаление темы!",
-                                        MessageBoxButtons.YesNo,
-                                        MessageBoxIcon.Information,
-                                        MessageBoxDefaultButton.Button2,
-                                        MessageBoxOptions.DefaultDesktopOnly);
-                        if (themeResult == DialogResult.Yes)
+                        int removeThemeID = _MathInfoList[_listBoxId].ThemeID;
+                        var item = db.informationAboutMaths.Find(removeThemeID);
+                        if (item != null)
                         {
-                            int removeThemeID = _MathInfoList[_listBoxId].ThemeID;
-                            var item = db.informationAboutMaths.Find(removeThemeID);
-                            if (item != null)
-                            {
-                                db.informationAboutMaths.Remove(item);
-                                _MathInfoList.Remove(_MathInfoList[_listBoxId]);
-                                db.SaveChanges();
-                                _listBoxOfThemes.Items.RemoveAt(_listBoxId);
-                                if ((_listBoxOfThemes.Items.Count != 0) && (_listBoxOfThemes.SelectedIndex != -1))
-                                    _listBoxOfThemes.SetSelected(0, true);
-
-                                MessageBox.Show("Информация удалена");
-                            }
+                            db.informationAboutMaths.Remove(item);
+                            _MathInfoList.Remove(_MathInfoList[_listBoxId]);
+                            db.SaveChanges();
+                            MessageBox.Show("Информация удалена");
                         }
                     }
                 }
-                else
-                    MessageBox.Show("Нечего удалять");
-
                 GC.Collect();
             }
             catch (Exception ex)
@@ -545,46 +514,37 @@ namespace testing_system.Classes
         /// </summary>
         /// <param name="_questionsList">Список вопросов из теста</param>
         /// <param name="_listBoxId">Уникальный идентификатор выбранного вопроса</param>
-        /// <param name="_listBoxOfQuestions">Элемент управления для отображения вопросов</param>
-        public static void Remove(List<QuestionAndAnswer> _questionsList, int _listBoxId, ListBox _listBoxOfQuestions)
+        public static void Remove(List<QuestionAndAnswer> _questionsList, int _listBoxId)
         {
             try
             {
-                if ((_listBoxOfQuestions.Items.Count > 10) && (_listBoxOfQuestions.SelectedIndex != -1))
+                using (ApplicationContext db = new ApplicationContext())
                 {
-                    using (ApplicationContext db = new ApplicationContext())
+                    var question = db.questionNames.Find(_questionsList[_listBoxId].QuestionID,
+                        _questionsList[_listBoxId].TestID);
+                    DialogResult questionResult = MessageBox.Show($"Вы действительно хотите удалить " +
+                            $"вопрос {question.Name}",
+                                    "Удаление вопроса!",
+                                    MessageBoxButtons.YesNo,
+                                    MessageBoxIcon.Information,
+                                    MessageBoxDefaultButton.Button2,
+                                    MessageBoxOptions.DefaultDesktopOnly);
+                    if (questionResult == DialogResult.Yes)
                     {
-                        var question = db.questionNames.Find(_questionsList[_listBoxId].QuestionID,
-                            _questionsList[_listBoxId].TestID);
-                        DialogResult questionResult = MessageBox.Show($"Вы действительно хотите удалить " +
-                                $"вопрос {question.Name}",
-                                        "Удаление вопроса!",
-                                        MessageBoxButtons.YesNo,
-                                        MessageBoxIcon.Information,
-                                        MessageBoxDefaultButton.Button2,
-                                        MessageBoxOptions.DefaultDesktopOnly);
-                        if (questionResult == DialogResult.Yes)
+                        int removeQuestionID = _questionsList[_listBoxId].QuestionID;
+                        int removeTestID = _questionsList[_listBoxId].TestID;
+                        var item = db.questionNames.Find(removeQuestionID, removeTestID);
+                        var secItem = db.questionAndAnswers.Find(removeTestID, removeQuestionID);
+                        if (item != null)
                         {
-                            int removeQuestionID = _questionsList[_listBoxId].QuestionID;
-                            int removeTestID = _questionsList[_listBoxId].TestID;
-                            var item = db.questionNames.Find(removeQuestionID, removeTestID);
-                            var secItem = db.questionAndAnswers.Find(removeTestID, removeQuestionID);
-                            if (item != null)
-                            {
-                                db.questionAndAnswers.Remove(secItem);
-                                db.questionNames.Remove(item);
-                                db.SaveChanges();
-                                _questionsList.Remove(_questionsList[_listBoxId]);
-                                _listBoxOfQuestions.Items.RemoveAt(_listBoxId);
-                                _listBoxOfQuestions.SetSelected(_listBoxOfQuestions.Items.Count - 1, true);
-
-                                MessageBox.Show("Информация удалена");
-                            }
+                            db.questionAndAnswers.Remove(secItem);
+                            db.questionNames.Remove(item);
+                            db.SaveChanges();
+                            _questionsList.Remove(_questionsList[_listBoxId]);                                
+                            MessageBox.Show("Информация удалена");
                         }
                     }
                 }
-                else
-                    MessageBox.Show("В тесте должно быть минимум 10 вопросов!");
 
                 GC.Collect();
             }
@@ -599,27 +559,32 @@ namespace testing_system.Classes
         /// </summary>
         /// <param name="_testNamesList">Список наименований теста</param>
         /// <param name="_listBoxId">Идентификатор выбранного теста в ListBox-е</param>
-        /// <param name="_listBoxOfTests">Элемент управления для отображения тестов</param>
-        /// <param name="_listBoxOfQuestions">Элемент управления для отображения вопросов</param>
-        public static void Remove(List<TestName> _testNamesList, int _listBoxId,
-            ListBox _listBoxOfTests, ListBox _listBoxOfQuestions)
+        public static void Remove(List<TestName> _testNamesList, int _listBoxId)
         {
             try
             {
-                using(ApplicationContext db = new ApplicationContext())
+                using (ApplicationContext db = new ApplicationContext())
                 {
                     var findTestName = db.testNames.First(i => i.Name == _testNamesList[_listBoxId].Name);
-                    if (findTestName != null)
+                    DialogResult questionResult = MessageBox.Show($"Вы действительно хотите удалить " +
+                            $"тест {findTestName.Name}",
+                                    "Удаление вопроса!",
+                                    MessageBoxButtons.YesNo,
+                                    MessageBoxIcon.Information,
+                                    MessageBoxDefaultButton.Button2,
+                                    MessageBoxOptions.DefaultDesktopOnly);
+                    if (questionResult == DialogResult.Yes)
                     {
-                        db.testNames.Remove(findTestName);
-                        db.SaveChanges();
-                        _listBoxOfQuestions.Items.Clear();
-                        _testNamesList.Remove(findTestName);
-                        _listBoxOfTests.Items.RemoveAt(_listBoxId);
-                        MessageBox.Show("Тест удален");
+                        if (findTestName != null)
+                        {
+                            db.testNames.Remove(findTestName);
+                            db.SaveChanges();
+                            _testNamesList.Remove(findTestName);
+                            MessageBox.Show("Тест удален");
+                        }
+                        else
+                            MessageBox.Show("Тест не найден");
                     }
-                    else
-                        MessageBox.Show("Тест не найден");
                 }
                 GC.Collect();
             }
@@ -636,46 +601,35 @@ namespace testing_system.Classes
         /// <param name="_themeNameFromTextBox">Наименование выбранной темы</param>
         /// <param name="_themeContent">Содержимое темы в виде rtf документа</param>
         /// <param name="_listBoxId">Уникальный идентификатор выбранной темы</param>
-        /// <param name="_listOfThemes">Элемент управления для отображения тем</param>
-        public static void Edit(List<InformationAboutMath> _mathInfoList, 
-            TextBox _themeNameFromTextBox, RichTextBox _themeContent, 
-            int _listBoxId, ListBox _listOfThemes)
+        public static void Edit(List<InformationAboutMath> _mathInfoList,
+            TextBox _themeNameFromTextBox, RichTextBox _themeContent, int _listBoxId)
         {
             try
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    if ((_themeNameFromTextBox.TextLength > 6) && (_themeContent.TextLength > 20) &&
-                        (_listOfThemes.SelectedItems.Count > 0) && _listOfThemes.Items.Count > 0)
+                    if ((_themeNameFromTextBox.TextLength > 6) && (_themeContent.TextLength > 20))
                     {
-                        bool findName = db.informationAboutMaths.Any(i => i.Name == _themeNameFromTextBox.Text);
-                        if ((!findName) && ((_mathInfoList[_listBoxId].Name != _themeNameFromTextBox.Text)) ||
-                            (_themeContent.Text != _mathInfoList[_listBoxId].ThemeContent))
+                    bool findName = db.informationAboutMaths.Any(i => i.Name == _themeNameFromTextBox.Text);
+                        int updateID = _mathInfoList[_listBoxId].ThemeID;
+                        var itemForUpdate = db.informationAboutMaths.Find(updateID);
+                        if (itemForUpdate != null)
                         {
-                            int updateID = _mathInfoList[_listBoxId].ThemeID;
-                            var itemForUpdate = db.informationAboutMaths.Find(updateID);
-                            if (itemForUpdate != null)
-                            {
-                                itemForUpdate.Name = _themeNameFromTextBox.Text;
-                                _mathInfoList[_listBoxId].Name = _themeNameFromTextBox.Text;
-                                if ((!_mathInfoList[_listBoxId].ThemeContent.Contains(".rtf")))
-                                    _mathInfoList[_listBoxId].ThemeContent = _themeContent.Text;
-                                else
-                                    _themeContent.SaveFile(_mathInfoList[_listBoxId].ThemeContent);
+                            itemForUpdate.Name = _themeNameFromTextBox.Text;
+                            _mathInfoList[_listBoxId].Name = _themeNameFromTextBox.Text;
+                            if ((!_mathInfoList[_listBoxId].ThemeContent.Contains(".rtf")))
+                                _mathInfoList[_listBoxId].ThemeContent = _themeContent.Text;
+                            else
+                                _themeContent.SaveFile(_mathInfoList[_listBoxId].ThemeContent);
 
-                                db.informationAboutMaths.Update(itemForUpdate);
-                                db.SaveChanges();
-                                Sort(_mathInfoList);
-                                _listOfThemes.ClearSelected();
-                                _listOfThemes.Items.Clear();
-                                Show(_mathInfoList, _listOfThemes);
-                                ClearTextBox(_themeNameFromTextBox);
-                                _themeContent.Text = "";
-                            }
-                            MessageBox.Show("Информация изменена");
+                            db.informationAboutMaths.Update(itemForUpdate);
+                            db.SaveChanges();
+                            Sort(_mathInfoList);
+                            GetList(_mathInfoList);
+                            ClearTextBox(_themeNameFromTextBox);
+                            _themeContent.Text = "";
                         }
-                        else
-                            MessageBox.Show("Такая тема уже присутствует в базе либо информация не изменена");
+                        MessageBox.Show("Информация изменена");
                     }
                     else
                         MessageBox.Show("Некорректный ввод данных");
@@ -692,17 +646,13 @@ namespace testing_system.Classes
         /// Необходим для изменения вопросов в тесте
         /// </summary>
         /// <param name="_questionsList">Список вопросов</param>
-        /// <param name="_questionNamesList">Список наименований вопросов</param>
         /// <param name="_selectedQuestionId">Индекс выбранного вопроса в ListBox-e</param>
-        /// <param name="_listBoxOfQuestions">Компонент для отображения наименований вопросов</param>
-        /// <param name="_listBoxOfTests">Компонент, отображающий наименование тестов</param>
         /// <param name="_answersAndName">Наименования вопроса и ответы</param>
-        public static void Edit(List<QuestionAndAnswer> _questionsList, List<QuestionName> _questionNamesList,
-            int _selectedQuestionId, ListBox _listBoxOfQuestions, ListBox _listBoxOfTests, params string[] _answersAndName )
+        public static void Edit(List<QuestionAndAnswer> _questionsList,
+            int _selectedQuestionId, params string[] _answersAndName )
         {
             try
             {
-                int listboxOfTestId = _listBoxOfTests.SelectedIndex;
                 bool isChanged = false;
                 using(ApplicationContext db = new ApplicationContext())
                 {
@@ -719,11 +669,19 @@ namespace testing_system.Classes
                         itemForUpdate.WrongAnswer_2, itemForUpdate.WrongAnswer_3, questionName};
                         for (int i = 0; i < _answersAndName.Length; i++)
                         {
-                            if (answersAndName[i] != _answersAndName[i])
+                            if(_answersAndName[i].Length == 0)
                             {
-                                isChanged = true;
+                                isChanged = false;
                                 break;
                             }
+                            else
+                            {
+                                if (answersAndName[i] != _answersAndName[i])
+                                {
+                                    isChanged = true;
+                                    break;
+                                }
+                            } 
                         }
                         if (isChanged)
                         {
@@ -735,9 +693,7 @@ namespace testing_system.Classes
                             db.questionNames.Update(questionNameItem);
                             db.questionAndAnswers.Update(itemForUpdate);
                             db.SaveChanges();       
-                            MessageBox.Show("Информация обновлена");
-                            _listBoxOfTests.SetSelected(listboxOfTestId, true);
-                            Show(_questionsList, testName, _listBoxOfQuestions, _questionNamesList);
+                            MessageBox.Show("Информация обновлена");                           
                         }
                         else
                             MessageBox.Show("Необходимо указать изменения!");
@@ -751,27 +707,96 @@ namespace testing_system.Classes
             }
         }
 
-        public static void PrepareQuestions(int _questionsCount, List<QuestionAndAnswer> _questionsList,
-            List<QuestionName> _questionsNameList, int _selectedItemId)
+        /// <summary>
+        /// Необходим для подготовки вопросов к тесту
+        /// </summary>
+        /// <param name="_testId">Уникальный идентификатор теста</param>
+        /// <returns></returns>
+        public static List<QuestionName> PrepareQuestions(int _testId)
         {
-
+            List<QuestionName> listForTest = new List<QuestionName>();
+            using (ApplicationContext db = new ApplicationContext())
+            {
+                var _questionsNameList = db.questionNames.Where(i => i.TestID == _testId).ToList();
+                MixQuestionsOrAnswers(_questionsNameList);
+                listForTest = _questionsNameList;
+            }
+            return listForTest;
         }
 
-        public static void MixQuestionsOrAnswers(int[] _mixedArray)
+        /// <summary>
+        /// Необходим для перемешивания ответов вопроса
+        /// </summary>
+        /// <param name="_answers">Список ответов на вопросы</param>
+        /// <param name="_questionPos">Позиция вопроса в списке вопросов</param>
+        public static void MixAnswers(ref string[,] _answers, int _questionPos)
         {
-            //можно использовать для генерации вопросов
-            //так и для ответов и выбора вопросов(одно и тоже с генерацией)
-            //перемешать все и выбрать первый 10 или 5 из начала 5 с конца
+            List<string> answers = new List<string>();
+            for (int i = 0; i < 4; i++)
+            {
+                answers.Add(_answers[_questionPos,i]);
+            }
+            MixQuestionsOrAnswers(answers);
+            for (int i = 0; i < 4; i++)
+            {
+                _answers[_questionPos, i] = answers[i];
+            }
+        }
+
+        /// <summary>
+        /// Тасование Фишера-Йетса
+        /// </summary>
+        /// <param name="_mixedArray">Перемешанное множество элементов</param>
+        public static void MixQuestionsOrAnswers<T>(List<T> _mixedArray)
+        {
             //Тасование Фишера-Йетса
             Random rand = new Random();
-            for(int i = _mixedArray.Length - 1; i >= 1; i--)
+            for(int i = _mixedArray.Count; i > 0; i--)
     {
-                int j = rand.Next(i + 1);
+                int j = rand.Next(i - 1);
 
-                int tmp = _mixedArray[j];
-                _mixedArray[j] = _mixedArray[i];
-                _mixedArray[i] = tmp;
+                var tmp = _mixedArray[j];
+                _mixedArray[j] = _mixedArray[i - 1];
+                _mixedArray[i - 1] = tmp;
             }
+        }
+
+        /// <summary>
+        /// Необходим для представления статистики теста пользователю
+        /// </summary>
+        /// <param name="_user">Конкретный пользователь</param>
+        /// <returns>Статистика пользователя в текстовом виде</returns>
+        public static string ViewStatisticOfTests(User _user)
+        {
+            string result = "";
+            try
+            {
+                using(ApplicationContext db = new ApplicationContext())
+                {
+                    var statistic = (from b in db.statisticOfTests
+                                     where b.UserID == _user.Id
+                                     select b).ToList();
+
+                    if (statistic.Count() > 0)
+                    {
+                        string[] testsNames = new string[statistic.Count()];
+                        for (int i = 0; i < statistic.Count(); i++)
+                        {
+                            var testName = db.testNames.Find(statistic[i].TestID);
+                            testsNames[i] = testName.Name;
+                            result += $"При прохождении теста \"{testsNames[i]}\" правильно были отвечены: " +
+                                $"{statistic[i].Mark} из 10 вопросов. \n";
+                        }
+                    }
+                    else
+                        result = "Статистика отсутствует";
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Возникла ошибка!");
+            }
+            return result;
         }
     }
 }

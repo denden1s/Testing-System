@@ -7,13 +7,9 @@ using System.Security.Cryptography;
 
 namespace testing_system.Classes
 {
-    /// <summary>
-    /// Класс необходим для шифрования пароля
-    /// </summary>
     class Encryption
     {
-        public Encryption()
-        {}
+        public Encryption() {}
 
         /// <summary>
         /// Метод шифрует пароль пользователя
@@ -27,8 +23,6 @@ namespace testing_system.Classes
             if(password.Length<20)
             {
                 encryptPassword = ComputeSha256Hash(password + sole);
-                //при добавлении пользователя через sql server пароль не будет защищен,
-                // хотя в программе пароль будет шифроваться
             }
             else
             {

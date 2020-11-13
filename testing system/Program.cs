@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using testing_system.Classes;
 
@@ -22,7 +20,7 @@ namespace testing_system
             {
                if(db.Users.Count() == 0)
                {
-                    User administrator = new Admin("Admin", "123","администратор");
+                    User administrator = new User("Admin", "123","администратор");
                     db.Users.Add(administrator);
                     db.SaveChanges();
                }
@@ -37,21 +35,8 @@ namespace testing_system
             {
                 using (ApplicationContext db = new ApplicationContext())
                 {
-                    //var user = db.Users.Find(true);
-                    //использование запроса для определения статуса 
-                    //авторизованного пользователя
-                    //Linq 
                     var _user = db.Users.FirstOrDefault(i => i.IsAuthorized == true);
-                        //from b in db.Users
-                        //        where b.IsAuthorized == true
-                        //        select b;
-                    //User user = new User();
-                    //user = (User)_user.Single();
-                    //foreach(User user in _user)
-                    //{
-                    //    user1 = user;
-                    //}
-                    if (_user.UserStatus == "администратор") //is Admin)
+                    if (_user.UserStatus == "администратор")
                     {
                         Application.Run(new FormForAdmin());
                     }
@@ -63,7 +48,7 @@ namespace testing_system
             }
             else
             {
-                Application.Run(new Form1());
+                Application.Run(new AuthorizationForm());
             }
         }
     }

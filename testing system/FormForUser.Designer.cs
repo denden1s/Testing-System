@@ -51,7 +51,7 @@
             this.выйтиИзУчетнойЗаписиToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(916, 28);
+            this.menuStrip1.Size = new System.Drawing.Size(1145, 38);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -74,6 +74,7 @@
             this.статистикаТестовToolStripMenuItem.Name = "статистикаТестовToolStripMenuItem";
             this.статистикаТестовToolStripMenuItem.Size = new System.Drawing.Size(146, 24);
             this.статистикаТестовToolStripMenuItem.Text = "Статистика тестов";
+            this.статистикаТестовToolStripMenuItem.Click += new System.EventHandler(this.статистикаТестовToolStripMenuItem_Click);
             // 
             // выйтиИзУчетнойЗаписиToolStripMenuItem
             // 
@@ -97,7 +98,7 @@
             // 
             this.LabelForComboBox.AutoSize = true;
             this.LabelForComboBox.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.LabelForComboBox.Location = new System.Drawing.Point(322, 40);
+            this.LabelForComboBox.Location = new System.Drawing.Point(258, 38);
             this.LabelForComboBox.Name = "LabelForComboBox";
             this.LabelForComboBox.Size = new System.Drawing.Size(73, 27);
             this.LabelForComboBox.TabIndex = 3;
@@ -105,10 +106,11 @@
             // 
             // comboBox1
             // 
+            this.comboBox1.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(401, 44);
+            this.comboBox1.Location = new System.Drawing.Point(337, 38);
             this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(121, 24);
+            this.comboBox1.Size = new System.Drawing.Size(251, 27);
             this.comboBox1.TabIndex = 4;
             this.comboBox1.SelectedValueChanged += new System.EventHandler(this.comboBox1_SelectedValueChanged);
             // 
@@ -125,12 +127,13 @@
             // ButtonForTest
             // 
             this.ButtonForTest.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ButtonForTest.Location = new System.Drawing.Point(544, 44);
+            this.ButtonForTest.Location = new System.Drawing.Point(611, 36);
             this.ButtonForTest.Name = "ButtonForTest";
-            this.ButtonForTest.Size = new System.Drawing.Size(117, 24);
+            this.ButtonForTest.Size = new System.Drawing.Size(117, 32);
             this.ButtonForTest.TabIndex = 6;
             this.ButtonForTest.Text = "Начать тест";
             this.ButtonForTest.UseVisualStyleBackColor = true;
+            this.ButtonForTest.Click += new System.EventHandler(this.ButtonForTest_Click);
             // 
             // FormForUser
             // 

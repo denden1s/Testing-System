@@ -1,12 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using testing_system.Classes;
 using testing_system.Classes.ForDataBase;
@@ -15,7 +10,9 @@ namespace testing_system
 {
     public partial class FormForAdmin : Form
     {
-        private Form1 form1;
+        //Необходимо для перехода к окну авторизации
+        private AuthorizationForm form1;
+
         //необходимы для хранения информации из БД
         private List<InformationAboutMath> MathematicInfo;
         private List<QuestionAndAnswer> QuestionAndAnswers;
@@ -44,9 +41,6 @@ namespace testing_system
         //необходимо для хранения наименований вопросов при создании теста
         private string[] qNames;
 
-        /// <summary>
-        /// Конструктор формы администратора
-        /// </summary>
         public FormForAdmin()
         {
             Users = new List<User>();
@@ -61,64 +55,51 @@ namespace testing_system
 
         private void выйтиИзУчётнойЗаписиToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            form1 = new Form1();
+            form1 = new AuthorizationForm();
             form1.Show();
             this.Hide();
         }
 
         private void FormForAdmin_Load(object sender, EventArgs e)
         {
+            this.HelpButton = true;
             MathInformation.Enabled = false;
             EnumQuestions.Visible = false;
             label13.Visible = false;
-            EditUserButton.Enabled = false;
-            EditTestButton.Enabled = false;
-            EditQuestionButton.Enabled = false;
-            EditTestButton.Enabled = false;
-            EditThemeButton.Enabled = false;
-            AddThemeButton.Enabled = false;
+            ChangeButtonEnabled(false, EditUserButton, 
+                EditTestButton, EditThemeButton, AddThemeButton, EditQuestionButton);
             EnabledTextBoxes(false, EnterUserName, EnterPassword, ThemeName,
                 textBox1, textBox2, textBox3, textBox4, EnterQuestion, EnterTestName);
             OperatingMode.Text = "Режим работы";
             openFileDialog1.Filter = "Rich Text Format|*.rtf";
             numbersOfQuestions = 0;
-            SystemFunctions.Show(Users, ListOfUsers);
-            SystemFunctions.Show(MathematicInfo, ListOfThemes);
-            SystemFunctions.Show(TestNames, ListOfTests);
-
+            ShowUsers();
+            ShowMathThemes();
+            ShowTest();
         }
 
         private void FormForAdmin_FormClosed(object sender, FormClosedEventArgs e)
         {
-            //можно сделать сохранение данных несохраненных
             Application.Exit();
         }
 
-        /// <summary>
-        /// Необходим для визуального преобразования кнопки 
-        /// </summary>
+        //Необходимы для изменения кнопок
         private void ButtonAdd(Button _button)
         {
             _button.Text = "Добавить";
             _button.BackColor = Color.LimeGreen;
         }
 
-        /// <summary>
-        /// Необходим для визуального преобразования кнопки 
-        /// </summary>
         private void ButtonRemove(Button _button)
         {
             _button.Text = "Удалить";
             _button.BackColor = Color.Red;
         }
 
-        /// <summary>
-        /// Необходим для графического преобразования кнопки "Изменение"
-        /// </summary>
         private void ButtonModification(Button _button)
         {
             _button.Text = "Изменить";
-            _button.BackColor = Color.LightSlateGray;
+            _button.BackColor = Color.LightBlue;
         }
 
         private void RemoveUser_EnabledChanged(object sender, EventArgs e)
@@ -130,41 +111,21 @@ namespace testing_system
 
         private void EditUserButton_Click(object sender, EventArgs e)
         {
-            //int[] a = new int[1000];
-            //for (int i = 0; i < 1000; i++)
-            //{
-            //    a[i] = i;
-            //}
-            //SystemFunctions.MixQuestionsOrAnswers(a);
-            //string q = "";
-            //foreach (int aa in a)
-            //{
-            //    q += " " + Convert.ToString(aa);
-            //}
-            //MessageBox.Show(q);
             EnterUserName.Text = EnterUserName.Text.Trim();
             if (EditUserButton.Text == "Добавить")
-            {
-                SystemFunctions.Add(Users, EnterUserName, EnterPassword, ListOfUsers);
-                SystemFunctions.ClearTextBox(EnterUserName, EnterPassword);
-            }   
+                SystemFunctions.Add(Users, EnterUserName, EnterPassword); 
             else 
-            {
-                if ((ListOfUsers.Items.Count > 0)&&(ListOfUsers.SelectedIndex != -1))
-                {
-                    SystemFunctions.Remove(Users, listBoxUserId, ListOfUsers);
-                    this.TopMost = true;
-                    ListOfUsers.SetSelected(ListOfUsers.Items.Count - 1, true);
-                }
-                else
-                    MessageBox.Show("Нечего удалять");
-            }
+                SystemFunctions.Remove(Users, listBoxUserId);
+
+            ShowUsers();
+            if(EditUserButton.Text == "Удалить")
+                ListOfUsers.SetSelected(0, true);
         }
 
         private void AddUser_CheckedChanged(object sender, EventArgs e)
         {
-            EditUserButton.Enabled = true;
-            ButtonAdd(EditUserButton);
+            EnterUserName_TextChanged(sender, e);
+            EditUserButton.Text = "Добавить";
             OperatingMode.Text = "Добавление пользователя";
             EnabledTextBoxes(true, EnterUserName, EnterPassword);
             ListOfUsers.ClearSelected();
@@ -177,9 +138,7 @@ namespace testing_system
             OperatingMode.Text = "Удаление пользователя";
             EnabledTextBoxes(false, EnterUserName, EnterPassword);
             SystemFunctions.ClearTextBox(EnterUserName, EnterPassword);
-            //if ((ListOfUsers.Items.Count != 0) && (ListOfUsers.SelectedItems.Count == 0))
-            //    ListOfUsers.SetSelected(ListOfUsers.Items.Count - 1, true);
-            ListOfUsers.ClearSelected();
+            ListOfUsers.SetSelected(0, true);
         }
 
         private void ListOfUsers_SelectedIndexChanged(object sender, EventArgs e)
@@ -190,34 +149,39 @@ namespace testing_system
         private void EditThemeButton_Click(object sender, EventArgs e)
         {
             if (OperatingMode.Text == "Удаление информации")
-            {                
-                    SystemFunctions.Remove(MathematicInfo, listBoxMathId, ListOfThemes);
+            {
+                if ((ListOfThemes.Items.Count > 0) && (ListOfThemes.SelectedIndex != -1))
+                {
+                    SystemFunctions.Remove(MathematicInfo, listBoxMathId);
                     MathInformation.Clear();
                     ThemeName.Clear();
+                }
+                else MessageBox.Show("Нечего удалять");
             }
             else if(OperatingMode.Text == "Изменение информации") 
             {
-                SystemFunctions.Edit(MathematicInfo, ThemeName, MathInformation, listBoxMathId, ListOfThemes);
+                if ((ListOfThemes.SelectedItems.Count > 0) && (ListOfThemes.SelectedIndex != -1))
+                {
+                    SystemFunctions.Edit(MathematicInfo, ThemeName, MathInformation, listBoxMathId);
+                    MathInformation.Clear();
+                    ThemeName.Clear();
+                }
+                else
+                    MessageBox.Show("Нечего изменять");
             }
-            this.TopMost = true;
+            ShowMathThemes();
         }
 
         private void AddThemeButton_Click(object sender, EventArgs e)
         {
             MathInformation.Text = MathInformation.Text.Trim();
             ThemeName.Text = ThemeName.Text.Trim();
-            ThemeName.Enabled = false;
-
             if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
                 return;
             string filename = openFileDialog1.FileName;
-            MessageBox.Show("Файл добавлен");
-            using (ApplicationContext db = new ApplicationContext())
-            {
-                SystemFunctions.Add(MathematicInfo, ThemeName, filename, ListOfThemes);
-                db.SaveChanges();
-                ThemeName.Clear();
-            }
+            SystemFunctions.Add(MathematicInfo, ThemeName, filename);
+            ShowMathThemes();
+            ThemeName.Clear();
         }
 
         private void ListOfThemes_SelectedIndexChanged(object sender, EventArgs e)
@@ -227,9 +191,9 @@ namespace testing_system
             {
                 if ((EditTheme.Checked) || (RemoveTheme.Checked))
                 {
-                    if (ListOfThemes.SelectedIndex == -1)
+                    if ((ListOfThemes.SelectedIndex == -1)&&(ListOfQuestions.SelectedIndex == -1))
                     {
-                        ListOfThemes.SetSelected(0, true);
+                        ListOfThemes.SetSelected(ListOfThemes.Items.Count - 1, true);
                         listBoxMathId = 0;
                     }
                     ThemeName.Text = MathematicInfo[listBoxMathId].Name;
@@ -243,7 +207,6 @@ namespace testing_system
 
         private void AddTheme_CheckedChanged(object sender, EventArgs e)
         {
-            ButtonModification(EditThemeButton);
             ListOfThemes.ClearSelected();
             AddThemeButton.Enabled = false;
             OperatingMode.Text = "Добавление информации";
@@ -255,39 +218,80 @@ namespace testing_system
         }
 
         private void RemoveTheme_CheckedChanged(object sender, EventArgs e)
-        {          
-            ButtonRemove(EditThemeButton);
+        {
+            AddThemeButton.BackColor = Color.DarkGray;
             SystemFunctions.ClearTextBox(ThemeName);
             MathInformation.Text = "";
             OperatingMode.Text = "Удаление информации";
-            EditThemeButton.Enabled = true;
+            EditThemeButton.Text = "Удалить";
             AddThemeButton.Enabled = false;
             ThemeName.Enabled = false;
             MathInformation.Enabled = true;
             MathInformation.ReadOnly = true;
-            if (ListOfThemes.Items.Count != 0)
+            if ((ListOfThemes.Items.Count != 0) && (ListOfThemes.SelectedIndex == -1))
                 ListOfThemes.SetSelected(ListOfThemes.Items.Count - 1, true);
+            else
+                ListOfThemes_SelectedIndexChanged(sender, e);
         }
 
         private void ThemeName_TextChanged(object sender, EventArgs e)
         {
-            if ((ThemeName.TextLength > 6)&&(AddTheme.Checked))
-                AddThemeButton.Enabled = true;
+            if (AddTheme.Checked)
+            {
+                if(ThemeName.TextLength > 6)
+                {
+                    AddThemeButton.Enabled = true;
+                    ButtonAdd(AddThemeButton);
+                }
+                else
+                {
+                    AddThemeButton.Enabled = false;
+                    AddThemeButton.BackColor = Color.DarkGray;
+                }
+            }
+            if (RemoveTheme.Checked)              
+            {
+                if(ThemeName.TextLength > 6)
+                {
+                    EditThemeButton.Enabled = true;
+                    ButtonRemove(EditThemeButton);
+                }
+                else
+                {
+                    EditThemeButton.Enabled = false;
+                    EditThemeButton.BackColor = Color.DarkGray;
+                }
+            }
+            if(EditTheme.Checked) 
+            {
+                if ((ThemeName.TextLength > 6) && (ListOfThemes.SelectedIndex != -1))
+                {
+                    EditThemeButton.Enabled = true;
+                    ButtonModification(EditThemeButton);
+                }
+                else
+                {
+                    EditThemeButton.Enabled = false;
+                    EditThemeButton.BackColor = Color.DarkGray;
+                }
+            }
         }
 
         private void EditTheme_CheckedChanged(object sender, EventArgs e)
         {
+            AddThemeButton.BackColor = Color.DarkGray;
             ThemeName.Clear();
             MathInformation.Clear();
             OperatingMode.Text = "Изменение информации";
+            EditThemeButton.Text = "Изменить";
             ThemeName.Enabled = true;
             MathInformation.Enabled = true;
             MathInformation.Enabled = true;
             MathInformation.ReadOnly = false;
-            ButtonModification(EditThemeButton);
-            EditThemeButton.Enabled = true;
-            if (ListOfThemes.Items.Count != 0)
+            if ((ListOfThemes.Items.Count != 0) && (ListOfThemes.SelectedIndex == -1))
                 ListOfThemes.SetSelected(ListOfThemes.Items.Count - 1, true);
+            else
+                ListOfThemes_SelectedIndexChanged(sender, e);
         }
 
         private void panel1_MouseEnter(object sender, EventArgs e)
@@ -338,32 +342,34 @@ namespace testing_system
             else if(OperatingMode.Text.Contains("Удаление"))
                 OperatingMode.BackColor = Color.Red;
             else if(OperatingMode.Text.Contains("Изменение"))
-                OperatingMode.BackColor = Color.Gray;
+                OperatingMode.BackColor = Color.LightBlue;
             else OperatingMode.BackColor = Color.White;
         }
 
         private void AddTest_CheckedChanged(object sender, EventArgs e)
         {
             OperatingMode.Text = "Добавление теста";
-            ButtonAdd(EditTestButton);
-            EnterTestName.Enabled = true;
+
+            EnterTestName.Clear();
+            EditTestButton.Text = "Добавить";
+            EditTestButton.BackColor = Color.DarkGray;
             ListOfTests.ClearSelected();
             ListOfQuestions.Items.Clear();
-            EditTestButton.Enabled = true;
             EnterTestName.Enabled = true;
-            //if ((ListOfTests.SelectedIndex == -1)&&(ListOfTests.Items.Count > 0))
-            //  ListOfTests.SetSelected(0, true);
+            EditTestButton.Enabled = false;
         }
 
         private void RemoveTest_CheckedChanged(object sender, EventArgs e)
         {
             OperatingMode.Text = "Удаление теста";
-            ButtonRemove(EditTestButton);
+            EditTestButton.Text = "Удалить";
             EnterTestName.Enabled = false;
-            if ((listBoxTestId == -1) && (ListOfTests.Items.Count > 0))
+            if ((ListOfTests.SelectedIndex == -1) && (ListOfTests.Items.Count > 0))
+            {
                 ListOfTests.SetSelected(ListOfTests.Items.Count - 1, true);
-
-            EditTestButton.Enabled = true;
+                EnterTestName.Text = TestNames[ListOfTests.SelectedIndex].Name;
+                EditTestButton.Enabled = true;
+            }    
         }
 
         private void EditTest_CheckedChanged(object sender, EventArgs e)
@@ -383,14 +389,14 @@ namespace testing_system
                     EnterTestName.Text.Trim();
                     SystemFunctions.Add(TestNames, QuestionAndAnswers,
                         EnterTestName.Text, qNames, questions);
-                    EnterTestName.Clear();
                     EditQuestionButton.Enabled = false;
                     label13.Visible = false;
                     EnumQuestions.Visible = false;
                     EnumQuestions.Text = "10";
+                    EnumQuestions.ForeColor = Color.Black;
+                    label13.ForeColor = Color.Black;
                     AddQuestion.Checked = false;
                     EnabledTextBoxes(false, textBox1, textBox2, textBox3, textBox4);
-                    EditQuestionButton.Enabled = false;
                     using (ApplicationContext db = new ApplicationContext())
                     {
                         QuestionNames.Clear();
@@ -400,11 +406,7 @@ namespace testing_system
                             QuestionNames.Add(qn);
                         }
                     }
-                    ListOfTests.Items.Clear();
-                    foreach (TestName test in TestNames)
-                    {
-                        ListOfTests.Items.Add(test.Name);
-                    }
+                    ShowTest();
                     numbersOfQuestions = 0;
                 }
                 else
@@ -412,32 +414,43 @@ namespace testing_system
                     EditTestButton.Enabled = false;
                     EnterTestName.Enabled = false;
                     EnumQuestions.Text = Convert.ToString(10 - numbersOfQuestions);
+                    label13.ForeColor = Color.Red;
+                    label13.Text = "Осталось вопросов:";
                     label13.Visible = true;
                     EnumQuestions.Visible = true;
+                    EnumQuestions.ForeColor = Color.Red; 
                     EnabledTextBoxes(true, textBox1, textBox2, textBox3, textBox4, EnterQuestion);
                     AddQuestion.Checked = true;
                 }
             }
             else
             {
-                if (ListOfTests.Items.Count > 0)
+                if ((ListOfTests.Items.Count > 0) && (ListOfTests.SelectedIndex != -1))
                 {
-                    SystemFunctions.Remove(TestNames, listBoxTestId, ListOfTests, ListOfQuestions);
-                    //ListOfTests.SetSelected(ListOfTests.Items.Count - 1, true);
+                    SystemFunctions.Remove(TestNames, ListOfTests.SelectedIndex);
+                    ListOfQuestions.Items.Clear();
+                    ShowTest();
+                    if (ListOfTests.Items.Count == 0)
+                        EditTestButton.BackColor = Color.DarkGray;
                     EnumQuestions.Visible = false;
                     label13.Visible = false;
                 }
                 else
-                    MessageBox.Show("Нечего удалять");
-                    
+                    MessageBox.Show("Не выбрана информация для удаления");   
             }
-
         }
 
         private void AddQuestion_CheckedChanged(object sender, EventArgs e)
         {
-            ButtonAdd(EditQuestionButton);
-            EditQuestionButton.Enabled = true;
+            if(RemoveTest.Checked)
+            {
+                RemoveTest.Checked = false;
+                EditTestButton.Enabled = false;
+                EnterTestName.Clear();
+                EditTestButton.Text = "";
+                EditTestButton.BackColor = Color.DarkGray;
+            }
+            EditQuestionButton.Text = "Добавить";
             EnabledTextBoxes(true, textBox1, textBox2, textBox3, textBox4, EnterQuestion);
             if ((ListOfTests.SelectedIndex == -1) && (ListOfTests.Items.Count > 0))
             {
@@ -472,7 +485,6 @@ namespace testing_system
                         questions[numbersOfQuestions, 2] = textBox3.Text;
                         questions[numbersOfQuestions, 3] = textBox4.Text;
 
-
                         EnumQuestions.Text = Convert.ToString(10 - numbersOfQuestions - 1);
                         qNames[numbersOfQuestions] = EnterQuestion.Text;
                         SystemFunctions.ClearTextBox(EnterQuestion, textBox1,
@@ -493,15 +505,22 @@ namespace testing_system
                     if ((textBox1.TextLength > 0) && (textBox2.TextLength > 0) &&
                        (textBox3.TextLength > 0) && (textBox4.TextLength > 0) && (EnterQuestion.TextLength > 0))
                     {
-                        string[] questions = { textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text };
+                    string[] questions = { textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text };
+                ListOfQuestions.Items.Clear();
+
+                    SystemFunctions.Add(QuestionAndAnswers, EnterQuestion.Text, QuestionAndAnswers[0].TestID,
+                        QuestionAndAnswers[QuestionAndAnswers.Count - 1].QuestionID, questions);
+
+                    SystemFunctions.ClearTextBox(textBox1, textBox2, textBox3, textBox4, EnterQuestion);
+
+                    SystemFunctions.GetList(QuestionAndAnswers,
+                        TestNames[ListOfTests.SelectedIndex].Name, QuestionNames);
+
                     ListOfQuestions.Items.Clear();
-                        SystemFunctions.Add(QuestionAndAnswers, EnterQuestion.Text,
-                            QuestionAndAnswers[0].TestID, QuestionAndAnswers[QuestionAndAnswers.Count - 1].QuestionID,
-                            questions, ListOfQuestions);
-                        SystemFunctions.ClearTextBox(textBox1, textBox2,
-                                                  textBox3, textBox4, EnterQuestion);
-                        SystemFunctions.Show(QuestionAndAnswers,
-                            TestNames[ListOfTests.SelectedIndex].Name, ListOfQuestions, QuestionNames);
+                    foreach (var item in QuestionNames)
+                    {
+                        ListOfQuestions.Items.Add(item.Name);
+                    }
                     EnumQuestions.Text = Convert.ToString(ListOfQuestions.Items.Count);
                     }
                     else
@@ -513,12 +532,23 @@ namespace testing_system
                 {
                     if (QuestionAndAnswers.Count <= 10)
                     {
-                        EditQuestionButton.Enabled = false;
                         MessageBox.Show("Невозможно удалить вопросы т.к. их должно быть минимум 10");
                     }
-                    else
+                    else 
                     {
-                        SystemFunctions.Remove(QuestionAndAnswers, lisboxQuestionId, ListOfQuestions);
+                        SystemFunctions.Remove(QuestionAndAnswers, lisboxQuestionId);
+                        ListOfQuestions.Items.Clear();
+                        foreach (var item in QuestionNames)
+                        {
+                            ListOfQuestions.Items.Add(item.Name);
+                        }
+                        SystemFunctions.ClearTextBox(textBox1, textBox2, textBox3, textBox4, EnterQuestion);
+                        SystemFunctions.GetList(QuestionAndAnswers, TestNames[listBoxTestId].Name, QuestionNames);
+                        ListOfQuestions.Items.Clear();
+                        foreach (var item in QuestionNames)
+                        {
+                            ListOfQuestions.Items.Add(item.Name);
+                        }
                         EnumQuestions.Text = Convert.ToString(ListOfQuestions.Items.Count);
                     }
                 }
@@ -527,26 +557,52 @@ namespace testing_system
             }
             else if(ChangeQuestion.Checked)
             {
-                SystemFunctions.Edit(QuestionAndAnswers, QuestionNames, lisboxQuestionId, ListOfQuestions,
-                    ListOfTests, textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, EnterQuestion.Text);
+                if (ListOfQuestions.SelectedIndex != -1)
+                {
+                    SystemFunctions.Edit(QuestionAndAnswers, ListOfQuestions.SelectedIndex,
+                   textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, EnterQuestion.Text);
+                    ListOfQuestions.Items.Clear();
+                    foreach (var item in QuestionNames)
+                    {
+                        ListOfQuestions.Items.Add(item.Name);
+                    }
+                    SystemFunctions.ClearTextBox(textBox1, textBox2, textBox3, textBox4, EnterQuestion);
+                }
+                else
+                    MessageBox.Show("Не выбран вопрос для изменения");  
             }
         }
 
         private void EnterTestName_TextChanged(object sender, EventArgs e)
         {
-            if (EnterTestName.TextLength > 6)
-                EditTestButton.Enabled = true;
+
+            if (AddTest.Checked)
+            {
+                if (EnterTestName.TextLength > 6)
+                {
+                    ButtonAdd(EditTestButton);
+                    EditTestButton.Enabled = true;
+                }
+                else
+                {
+                    EditTestButton.Enabled = false;
+                    EditTestButton.BackColor = Color.DarkGray;
+                }
+            }   
         }
 
         private void ListOfTests_SelectedIndexChanged(object sender, EventArgs e)
         {
             listBoxTestId = ListOfTests.SelectedIndex;
-            if ((listBoxTestId == -1) &&(ListOfTests.Items.Count > 0))
+            if ((listBoxTestId == -1) && (ListOfTests.Items.Count > 0))
+            {
                 listBoxTestId = 0;
-            if(ListOfTests.Items.Count > 0)
-                SystemFunctions.Show(QuestionAndAnswers,
-                    TestNames[listBoxTestId].Name, ListOfQuestions, QuestionNames);
-            if(QuestionNames.Count >= 10)
+                ListOfTests.SetSelected(0, true);
+            }
+            if (ListOfTests.Items.Count > 0)
+                ShowQuestions();
+
+            if (QuestionNames.Count >= 10)
             {
                 label13.Text = "Всего вопросов в тесте";
                 EnumQuestions.Text = Convert.ToString(ListOfQuestions.Items.Count);
@@ -554,6 +610,19 @@ namespace testing_system
                 EnumQuestions.Visible = true;
             }
             SystemFunctions.ClearTextBox(textBox1, textBox2, textBox3, textBox4, EnterQuestion);
+            if (RemoveTest.Checked)
+            {
+                if(ListOfTests.Items.Count > 0)
+                {
+                    ButtonRemove(EditTestButton);
+                    EditTestButton.Enabled = true;
+                }
+                else
+                {
+                    EditTestButton.Enabled = false;
+                    EditTestButton.BackColor = Color.DarkGray;
+                }     
+            }
         }
 
         private void ListOfQuestions_SelectedIndexChanged(object sender, EventArgs e)
@@ -561,13 +630,18 @@ namespace testing_system
             lisboxQuestionId = ListOfQuestions.SelectedIndex;
             if (lisboxQuestionId == -1)
                 lisboxQuestionId = 0;
-            if ((RemoveQuestion.Checked) || (ChangeQuestion.Checked))
+            if ((ChangeQuestion.Checked) || (RemoveQuestion.Checked))
             {
+                if ((ListOfThemes.SelectedIndex == -1) && (ListOfQuestions.SelectedIndex == -1))
+                {
+                    ListOfQuestions.SetSelected(ListOfQuestions.Items.Count - 1, true);
+                    listBoxTestId = 0;
+                }
                 EditQuestionButton.Enabled = true;
-                if(ListOfQuestions.Items.Count > 0)
+                if((ListOfQuestions.Items.Count > 0)&&(ListOfQuestions.SelectedIndex != -1))
                 {
                     SystemFunctions.Show(QuestionNames, textBox1, textBox2,
-                    textBox3, textBox4, lisboxQuestionId);
+                    textBox3, textBox4, lisboxQuestionId);                  
                     EnterQuestion.Text = QuestionNames[lisboxQuestionId].Name;
                 }
             }
@@ -575,41 +649,73 @@ namespace testing_system
 
         private void RemoveQuestion_CheckedChanged(object sender, EventArgs e)
         {
-            if ((ListOfQuestions.SelectedIndex == -1) && (ListOfTests.Items.Count > 0))
-                ListOfQuestions.SetSelected(ListOfQuestions.Items.Count - 1, true);
-            ButtonRemove(EditQuestionButton);
+            if (RemoveTest.Checked)
+            {
+                RemoveTest.Checked = false;
+                EditTestButton.Enabled = false;
+                EnterTestName.Clear();
+                EditTestButton.Text = "";
+                EditTestButton.BackColor = Color.DarkGray;
+            }
+            EditQuestionButton.Text = "Удалить";
             OperatingMode.Text = "Удаление вопроса";
             EnabledTextBoxes(false, textBox1, textBox2, textBox3, textBox4, EnterQuestion);
             if (ListOfTests.SelectedIndex == -1)
             {
                 EditQuestionButton.Enabled = false;
+                EditQuestionButton.BackColor = Color.DarkGray;
             }
-            if ((ListOfQuestions.Items.Count > 0) && (ListOfQuestions.SelectedIndex == -1))
-                ListOfQuestions.SetSelected(ListOfQuestions.Items.Count - 1, true);
-            if (EnterTestName.Enabled == false)
+            if ((EnterTestName.Enabled == false)&& (EnterTestName.TextLength != 0))
                 AddQuestion.Checked = true;
+
+            if((ListOfTests.SelectedIndex != -1) && (ListOfQuestions.SelectedIndex != -1))
+            {
+                SystemFunctions.Show(QuestionNames, textBox1, textBox2,
+                    textBox3, textBox4, lisboxQuestionId);
+                EnterQuestion.Text = QuestionNames[lisboxQuestionId].Name;
+                EditQuestionButton.BackColor = Color.Red;
+            }
+            if((ListOfQuestions.SelectedIndex == -1) && (ListOfQuestions.Items.Count > 0))
+            {
+                ListOfQuestions.SetSelected(ListOfQuestions.Items.Count - 1, true);  
+            }
         }
 
         private void ChangeQuestion_CheckedChanged(object sender, EventArgs e)
         {
-            if ((ListOfTests.SelectedIndex == -1) && (ListOfTests.Items.Count > 0))
-        {
-            ListOfTests.SetSelected(ListOfTests.Items.Count - 1, true);
-        }
-            ListOfQuestions.SetSelected(0, true);
-            EnabledTextBoxes(true, textBox1, textBox2, textBox3,
-                      textBox4, EnterQuestion);
-
-            ButtonModification(EditQuestionButton);
-            OperatingMode.Text = "Изменение вопроса";
-            if (ListOfTests.SelectedIndex == -1)
+            if (RemoveTest.Checked)
             {
-                EditQuestionButton.Enabled = false;
-                EnabledTextBoxes(false, textBox1, textBox2, textBox3, textBox4, EnterQuestion);
+                RemoveTest.Checked = false;
+                EditTestButton.Enabled = false;
+                EnterTestName.Clear();
+                EditTestButton.Text = "";
+                EditTestButton.BackColor = Color.DarkGray;
             }
-            //if (EnterTestName.Enabled == false)
-            //    AddQuestion.Checked = true;
+            if ((EnterTestName.Enabled == false) && (EnterTestName.TextLength != 0))
+                AddQuestion.Checked = true;
+            else
+            {
+                if ((ListOfQuestions.SelectedIndex == -1) && 
+                    (ListOfTests.SelectedIndex != -1) && (ListOfQuestions.Items.Count > 0))
+                    ListOfQuestions.SetSelected(ListOfQuestions.Items.Count - 1, true);
 
+                EnabledTextBoxes(true, textBox1, textBox2, textBox3,
+                          textBox4, EnterQuestion);
+                OperatingMode.Text = "Изменение вопроса";
+                EditQuestionButton.Text = "Изменить";
+                if (ListOfQuestions.SelectedIndex == -1)
+                {
+                    EditQuestionButton.Enabled = false;
+                    EnabledTextBoxes(false, textBox1, textBox2, textBox3, textBox4, EnterQuestion);
+                }
+                if ((ListOfTests.SelectedIndex != -1) && (ListOfQuestions.SelectedIndex != -1))
+                {
+                    SystemFunctions.Show(QuestionNames, textBox1, textBox2,
+                        textBox3, textBox4, lisboxQuestionId);
+                    EnterQuestion.Text = QuestionNames[lisboxQuestionId].Name;
+                    EditQuestionButton.BackColor = Color.LightBlue;
+                }
+            }   
         }
 
         private void EnabledTextBoxes(bool _status, params TextBox[] _textBoxes)
@@ -630,5 +736,127 @@ namespace testing_system
             }
         }
 
+        private void FormForAdmin_HelpButtonClicked(object sender, CancelEventArgs e)
+        {
+            string fbPath = Application.StartupPath;
+            string fname = "NewProject.chm";
+            string filename = fbPath + @"\" + fname;
+            Help.ShowHelp(this, filename, HelpNavigator.Find, "");
+        }
+
+        private void ChangeButtonEnabled(bool _status, params Button[] _buttons)
+        {
+            for (int i = 0; i < _buttons.Length; i++)
+                _buttons[i].Enabled = _status;
+        }
+
+        private void ShowUsers()
+        {
+            ListOfUsers.Items.Clear(); 
+            Users.Clear();
+            SystemFunctions.GetList(Users);
+            foreach (User u in Users)
+            {
+                ListOfUsers.Items.Add(u.Name);
+            }
+            SystemFunctions.ClearTextBox(EnterPassword, EnterUserName);
+        }
+
+        private void ShowMathThemes()
+        {
+            ListOfThemes.Items.Clear();
+            MathematicInfo.Clear();
+            SystemFunctions.GetList(MathematicInfo);
+            foreach (InformationAboutMath info in MathematicInfo)
+            {
+                ListOfThemes.Items.Add(info.Name);
+            }
+            SystemFunctions.ClearTextBox(ThemeName);
+            MathInformation.Clear();
+        }
+
+        private void ShowTest()
+        {
+            ListOfTests.Items.Clear();
+            TestNames.Clear();
+            SystemFunctions.GetList(TestNames);
+            foreach (TestName item in TestNames)
+            {
+                ListOfTests.Items.Add(item.Name);
+            }
+            SystemFunctions.ClearTextBox(EnterTestName);
+            MathInformation.Clear();
+        }
+
+        private void ShowQuestions()
+        {
+            ListOfQuestions.Items.Clear();
+            SystemFunctions.GetList(QuestionAndAnswers, TestNames[listBoxTestId].Name, QuestionNames);
+            ListOfQuestions.Items.Clear();
+            foreach (var item in QuestionNames)
+            {
+                ListOfQuestions.Items.Add(item.Name);
+            }
+        }
+
+        private void EnterUserName_TextChanged(object sender, EventArgs e)
+        {
+            if ((EnterUserName.TextLength > 2) && (EnterPassword.TextLength > 0))
+            {
+                EditUserButton.Enabled = true;
+                ButtonAdd(EditUserButton);
+            }
+            else
+            {
+                EditUserButton.BackColor = Color.DarkGray;
+                EditUserButton.Enabled = false;
+            }
+
+        }
+
+        private void EnterPassword_TextChanged(object sender, EventArgs e)
+        {
+            EnterUserName_TextChanged(sender, e);
+        }
+
+        private void EnterQuestion_TextChanged(object sender, EventArgs e)
+        {
+            if((EnterQuestion.TextLength == 0) || (textBox1.TextLength == 0) || (textBox2.TextLength == 0)
+                    || (textBox3.TextLength == 0) || (textBox4.TextLength == 0))
+            {
+                EditQuestionButton.BackColor = Color.DarkGray;
+                EditQuestionButton.Enabled = false;
+            }
+            else
+            {
+                EditQuestionButton.Enabled = true;
+                if (ChangeQuestion.Checked)
+                    ButtonModification(EditQuestionButton);
+                if (RemoveQuestion.Checked)
+                    ButtonRemove(EditQuestionButton);
+                if (AddQuestion.Checked)
+                    ButtonAdd(EditQuestionButton);
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            EnterQuestion_TextChanged(sender, e);
+        }
+
+        private void textBox3_TextChanged(object sender, EventArgs e)
+        {
+            EnterQuestion_TextChanged(sender, e);
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+            EnterQuestion_TextChanged(sender, e);
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+            EnterQuestion_TextChanged(sender, e);
+        }
     }
 }

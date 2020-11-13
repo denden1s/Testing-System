@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using testing_system.Classes;
 using testing_system.Classes.ForDataBase;
 
@@ -45,15 +40,12 @@ namespace testing_system
         {
             //первичные ключи
             modelBuilder.Entity<User>().HasKey(u => u.Id);
-            modelBuilder.Entity<StatisticOfTest>().HasKey(k => new { k.UserID, k.TestID, k.Attemption });
+            modelBuilder.Entity<StatisticOfTest>().HasKey(k => new { k.UserID, k.TestID, k.Attempt });
             modelBuilder.Entity<TestName>().HasKey(u =>  u.TestID);
             modelBuilder.Entity<QuestionAndAnswer>().HasKey(k => new { k.TestID, k.QuestionID });
             modelBuilder.Entity<QuestionName>().HasKey(k => new { k.QuestionID, k.TestID });
-            modelBuilder.Entity<UserAnswer>().HasKey(k => new { k.TestID, k.QuestionID, k.UserID });
+            modelBuilder.Entity<UserAnswer>().HasKey(k => new { k.TestID, k.QuestionID, k.UserID, k.Attempt });
             modelBuilder.Entity<InformationAboutMath>().HasKey(k => k.ThemeID);
-
-            //внешние ключи
-            //добавить остальные элементы 
         }
     }
 }
