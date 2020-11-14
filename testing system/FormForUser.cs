@@ -99,7 +99,10 @@ namespace testing_system
         private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
         {
             if(themeIsSelect)
+            {
                 TBInformation.Visible = false;
+                ButtonForTest.Enabled = true;
+            }
             else
             {
                 TBInformation.Visible = true;
@@ -123,6 +126,7 @@ namespace testing_system
         private void тестыToolStripMenuItem_Click(object sender, EventArgs e)
         {
             TBInformation.Visible = false;
+            ButtonForTest.Enabled = false;
             themeIsSelect = true;
             ChooseElement.Visible = false;
             LabelForComboBox.Visible = true;

@@ -365,11 +365,14 @@ namespace testing_system
             EditTestButton.Text = "Удалить";
             EnterTestName.Enabled = false;
             if ((ListOfTests.SelectedIndex == -1) && (ListOfTests.Items.Count > 0))
-            {
                 ListOfTests.SetSelected(ListOfTests.Items.Count - 1, true);
+
+            if (ListOfTests.Items.Count > 0)
+            {
                 EnterTestName.Text = TestNames[ListOfTests.SelectedIndex].Name;
+                ButtonRemove(EditTestButton);
                 EditTestButton.Enabled = true;
-            }    
+            }
         }
 
         private void EditTest_CheckedChanged(object sender, EventArgs e)

@@ -456,8 +456,8 @@ namespace testing_system.Classes
                                 _usersList.Remove(_usersList[_listBoxId]);
                                 db.SaveChanges();
                             }
+                            MessageBox.Show("Пользователь удален");
                         }
-                        MessageBox.Show("Пользователь удален");
                     }
                     else
                         MessageBox.Show("Невозможно удалить администратора");
@@ -541,7 +541,7 @@ namespace testing_system.Classes
                             db.questionNames.Remove(item);
                             db.SaveChanges();
                             _questionsList.Remove(_questionsList[_listBoxId]);                                
-                            MessageBox.Show("Информация удалена");
+                            MessageBox.Show("Вопрос удален");
                         }
                     }
                 }
@@ -693,7 +693,7 @@ namespace testing_system.Classes
                             db.questionNames.Update(questionNameItem);
                             db.questionAndAnswers.Update(itemForUpdate);
                             db.SaveChanges();       
-                            MessageBox.Show("Информация обновлена");                           
+                            MessageBox.Show("Вопрос обновлен");                           
                         }
                         else
                             MessageBox.Show("Необходимо указать изменения!");

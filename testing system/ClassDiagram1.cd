@@ -1,41 +1,118 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
-  <Class Name="testing_system.Classes.Encryption">
-    <Position X="8.25" Y="3" Width="1.5" />
+  <Class Name="testing_system.Classes.Encryption" Collapsed="true">
+    <Position X="11.25" Y="1.75" Width="2" />
     <TypeIdentifier>
       <HashCode>ACAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Classes\Encryption.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="testing_system.FormForAdmin">
-    <Position X="0.5" Y="0.5" Width="2.75" />
+  <Class Name="testing_system.FormForAdmin" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="3.75" />
     <Compartments>
       <Compartment Name="Fields" Collapsed="true" />
     </Compartments>
     <TypeIdentifier>
-      <HashCode>8ekBULMaBCGAEDDzaLrCQERmIgUEGIEgGEgALQAAREA=</HashCode>
+      <HashCode>8ekBULMaBCGQFDjzaLrGSER2ogUEGIEgPEhALQAAREA=</HashCode>
       <FileName>FormForAdmin.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="testing_system.FormForUser">
-    <Position X="3.75" Y="0.75" Width="1.5" />
+  <Class Name="testing_system.FormForUser" Collapsed="true">
+    <Position X="4.5" Y="0.5" Width="3.5" />
     <TypeIdentifier>
-      <HashCode>AwABCFJAASAAgAGxAACIQFQCIAAAAAAAAAAAIAAAAAA=</HashCode>
+      <HashCode>AwABCFJAASAAgAGxAACIYFQCIAAAAAQAAAAAIAAAAAA=</HashCode>
       <FileName>FormForUser.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="testing_system.Form1">
-    <Position X="5.5" Y="0.75" Width="1.5" />
+  <Class Name="testing_system.AuthorizationForm" Collapsed="true">
+    <Position X="8.25" Y="0.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAARACAAACAAABEAAACAAAACAAgMAAAEAEQCAAAAAAA=</HashCode>
-      <FileName>Form1.cs</FileName>
+      <FileName>AuthorizationForm.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="testing_system.Classes.SystemFunctions">
-    <Position X="7.5" Y="0.5" Width="2.25" />
+  <Class Name="testing_system.Classes.SystemFunctions" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AAIAAAAAAAAAAAAAAAAQBBAAAAAEAAICACAAAAAAAAQ=</HashCode>
+      <HashCode>AAIAAAAAAQAQAAAAAAAQBBAAAAAEAAICACAAAAAAAAY=</HashCode>
       <FileName>Classes\SystemFunctions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="testing_system.TestingForm" Collapsed="true">
+    <Position X="10.75" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>kQRAAEAIACIAABAAAjCAgAgCAkFKIAAIAEAg0QAAx4I=</HashCode>
+      <FileName>TestingForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="testing_system.Classes.ForDataBase.InformationAboutMath" Collapsed="true">
+    <Position X="9.5" Y="2.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAEA=</HashCode>
+      <FileName>Classes\ForDataBase\InformationAboutMath.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="testing_system.Classes.ForDataBase.QuestionAndAnswer" Collapsed="true">
+    <Position X="7.5" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>BAACAOAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\ForDataBase\QuestionAndAnswer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="testing_system.Classes.ForDataBase.QuestionName" Collapsed="true">
+    <Position X="5.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAAAAAAAAAAAEAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\ForDataBase\QuestionName.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="testing_system.Classes.StatisticOfTest" Collapsed="true">
+    <Position X="4" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAAAAAAAAAAAEAAgAAAAAAAAAAACAAAAAAAA=</HashCode>
+      <FileName>Classes\ForDataBase\StatisticOfTest.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="testing_system.Classes.TestName" Collapsed="true">
+    <Position X="2.25" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\ForDataBase\TestName.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="testing_system.User" Collapsed="true">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAAAAAAAAAAAAAQAAAAACAACAAACCAAAAAA=</HashCode>
+      <FileName>Classes\ForDataBase\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="testing_system.Classes.ForDataBase.UserAnswer" Collapsed="true">
+    <Position X="11.75" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAgCAAAAAAAAAAAAAEAAgAAAAAAAAAAAAAAgAAAAA=</HashCode>
+      <FileName>Classes\ForDataBase\UserAnswer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="testing_system.ApplicationContext" Collapsed="true">
+    <Position X="8.75" Y="1.75" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAACAAAYAAAAAAAAAAAAgAEEAQAAABAAAAIAAAAAA=</HashCode>
+      <FileName>Classes\ApplicationContext.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DesktopScreen" Collapsed="true">
+    <Position X="4.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAQAAABAAAAAAAQAAAAEAAAAAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Classes\DesktopScreen.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="testing_system.Program" Collapsed="true">
+    <Position X="3" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

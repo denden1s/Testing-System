@@ -179,6 +179,8 @@ namespace testing_system
                     if (userAnswers[i].Answer == tenAnswers[i])
                         mark++;
                 }
+                timer1.Stop();
+                MessageBox.Show($"Правильно были решены {mark} из 10 вопросов.");
                 SystemFunctions.SaveUserStatistic(user.Id, test.TestID, mark, userAnswers[0].Attempt);
                 SaveChanges();
                 form = new FormForUser(user);
