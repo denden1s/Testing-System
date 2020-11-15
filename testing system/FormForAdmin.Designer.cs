@@ -95,15 +95,16 @@
             this.выйтиИзУчётнойЗаписиToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
             this.menuStrip1.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.menuStrip1.Size = new System.Drawing.Size(1282, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(962, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // выйтиИзУчётнойЗаписиToolStripMenuItem
             // 
             this.выйтиИзУчётнойЗаписиToolStripMenuItem.Name = "выйтиИзУчётнойЗаписиToolStripMenuItem";
-            this.выйтиИзУчётнойЗаписиToolStripMenuItem.Size = new System.Drawing.Size(198, 26);
+            this.выйтиИзУчётнойЗаписиToolStripMenuItem.Size = new System.Drawing.Size(167, 20);
             this.выйтиИзУчётнойЗаписиToolStripMenuItem.Text = "Выйти из учётной записи";
             this.выйтиИзУчётнойЗаписиToolStripMenuItem.Click += new System.EventHandler(this.выйтиИзУчётнойЗаписиToolStripMenuItem_Click);
             // 
@@ -111,45 +112,50 @@
             // 
             this.ListOfUsers.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ListOfUsers.FormattingEnabled = true;
-            this.ListOfUsers.ItemHeight = 22;
-            this.ListOfUsers.Location = new System.Drawing.Point(8, 48);
+            this.ListOfUsers.ItemHeight = 19;
+            this.ListOfUsers.Location = new System.Drawing.Point(6, 39);
+            this.ListOfUsers.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ListOfUsers.Name = "ListOfUsers";
-            this.ListOfUsers.Size = new System.Drawing.Size(278, 312);
+            this.ListOfUsers.Size = new System.Drawing.Size(210, 251);
             this.ListOfUsers.TabIndex = 2;
             this.ListOfUsers.SelectedIndexChanged += new System.EventHandler(this.ListOfUsers_SelectedIndexChanged);
             // 
             // label1
             // 
             this.label1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label1.Location = new System.Drawing.Point(324, 85);
+            this.label1.Location = new System.Drawing.Point(243, 69);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(249, 36);
+            this.label1.Size = new System.Drawing.Size(187, 29);
             this.label1.TabIndex = 0;
             this.label1.Text = "Логин";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // EnterUserName
             // 
-            this.EnterUserName.Location = new System.Drawing.Point(327, 123);
+            this.EnterUserName.Location = new System.Drawing.Point(245, 100);
+            this.EnterUserName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.EnterUserName.Name = "EnterUserName";
-            this.EnterUserName.Size = new System.Drawing.Size(245, 22);
+            this.EnterUserName.Size = new System.Drawing.Size(185, 20);
             this.EnterUserName.TabIndex = 4;
             this.EnterUserName.TextChanged += new System.EventHandler(this.EnterUserName_TextChanged);
             // 
             // EnterPassword
             // 
-            this.EnterPassword.Location = new System.Drawing.Point(327, 212);
+            this.EnterPassword.Location = new System.Drawing.Point(245, 172);
+            this.EnterPassword.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.EnterPassword.Name = "EnterPassword";
-            this.EnterPassword.Size = new System.Drawing.Size(245, 22);
+            this.EnterPassword.Size = new System.Drawing.Size(185, 20);
             this.EnterPassword.TabIndex = 6;
             this.EnterPassword.TextChanged += new System.EventHandler(this.EnterPassword_TextChanged);
             // 
             // label2
             // 
             this.label2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label2.Location = new System.Drawing.Point(324, 183);
+            this.label2.Location = new System.Drawing.Point(243, 149);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(249, 26);
+            this.label2.Size = new System.Drawing.Size(187, 21);
             this.label2.TabIndex = 5;
             this.label2.Text = "Пароль";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -158,9 +164,10 @@
             // 
             this.EditUserButton.BackColor = System.Drawing.Color.DarkGray;
             this.EditUserButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.EditUserButton.Location = new System.Drawing.Point(327, 320);
+            this.EditUserButton.Location = new System.Drawing.Point(245, 260);
+            this.EditUserButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.EditUserButton.Name = "EditUserButton";
-            this.EditUserButton.Size = new System.Drawing.Size(246, 40);
+            this.EditUserButton.Size = new System.Drawing.Size(184, 32);
             this.EditUserButton.TabIndex = 7;
             this.EditUserButton.UseVisualStyleBackColor = false;
             this.EditUserButton.Click += new System.EventHandler(this.EditUserButton_Click);
@@ -168,9 +175,10 @@
             // OperatingMode
             // 
             this.OperatingMode.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.OperatingMode.Location = new System.Drawing.Point(0, 28);
+            this.OperatingMode.Location = new System.Drawing.Point(0, 23);
+            this.OperatingMode.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.OperatingMode.Name = "OperatingMode";
-            this.OperatingMode.Size = new System.Drawing.Size(1290, 30);
+            this.OperatingMode.Size = new System.Drawing.Size(968, 24);
             this.OperatingMode.TabIndex = 8;
             this.OperatingMode.Text = "Режим работы";
             this.OperatingMode.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -179,9 +187,10 @@
             // label3
             // 
             this.label3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label3.Location = new System.Drawing.Point(4, 8);
+            this.label3.Location = new System.Drawing.Point(3, 6);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(283, 36);
+            this.label3.Size = new System.Drawing.Size(212, 29);
             this.label3.TabIndex = 9;
             this.label3.Text = "Все пользователи";
             this.label3.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -189,17 +198,19 @@
             // MathInformation
             // 
             this.MathInformation.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.MathInformation.Location = new System.Drawing.Point(528, 42);
+            this.MathInformation.Location = new System.Drawing.Point(396, 34);
+            this.MathInformation.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MathInformation.Name = "MathInformation";
-            this.MathInformation.Size = new System.Drawing.Size(711, 333);
+            this.MathInformation.Size = new System.Drawing.Size(534, 271);
             this.MathInformation.TabIndex = 10;
             this.MathInformation.Text = "";
             // 
             // ThemeName
             // 
-            this.ThemeName.Location = new System.Drawing.Point(261, 81);
+            this.ThemeName.Location = new System.Drawing.Point(196, 66);
+            this.ThemeName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ThemeName.Name = "ThemeName";
-            this.ThemeName.Size = new System.Drawing.Size(261, 22);
+            this.ThemeName.Size = new System.Drawing.Size(197, 20);
             this.ThemeName.TabIndex = 12;
             this.ThemeName.TextChanged += new System.EventHandler(this.ThemeName_TextChanged);
             // 
@@ -207,9 +218,10 @@
             // 
             this.AddUser.AutoSize = true;
             this.AddUser.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.AddUser.Location = new System.Drawing.Point(327, 16);
+            this.AddUser.Location = new System.Drawing.Point(245, 13);
+            this.AddUser.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.AddUser.Name = "AddUser";
-            this.AddUser.Size = new System.Drawing.Size(47, 31);
+            this.AddUser.Size = new System.Drawing.Size(39, 25);
             this.AddUser.TabIndex = 13;
             this.AddUser.TabStop = true;
             this.AddUser.Text = "+";
@@ -220,9 +232,10 @@
             // 
             this.RemoveUser.AutoSize = true;
             this.RemoveUser.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.RemoveUser.Location = new System.Drawing.Point(528, 15);
+            this.RemoveUser.Location = new System.Drawing.Point(396, 12);
+            this.RemoveUser.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.RemoveUser.Name = "RemoveUser";
-            this.RemoveUser.Size = new System.Drawing.Size(41, 31);
+            this.RemoveUser.Size = new System.Drawing.Size(34, 25);
             this.RemoveUser.TabIndex = 14;
             this.RemoveUser.TabStop = true;
             this.RemoveUser.Text = "-";
@@ -242,9 +255,10 @@
             this.panel1.Controls.Add(this.EnterPassword);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.EditUserButton);
-            this.panel1.Location = new System.Drawing.Point(12, 58);
+            this.panel1.Location = new System.Drawing.Point(9, 47);
+            this.panel1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(621, 380);
+            this.panel1.Size = new System.Drawing.Size(466, 309);
             this.panel1.TabIndex = 15;
             this.panel1.MouseEnter += new System.EventHandler(this.panel1_MouseEnter);
             // 
@@ -272,9 +286,10 @@
             this.panel2.Controls.Add(this.RemoveTest);
             this.panel2.Controls.Add(this.EnterTestName);
             this.panel2.Controls.Add(this.label7);
-            this.panel2.Location = new System.Drawing.Point(640, 58);
+            this.panel2.Location = new System.Drawing.Point(480, 47);
+            this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(630, 380);
+            this.panel2.Size = new System.Drawing.Size(472, 309);
             this.panel2.TabIndex = 16;
             this.panel2.MouseEnter += new System.EventHandler(this.panel2_MouseEnter);
             // 
@@ -283,18 +298,20 @@
             this.panel4.Controls.Add(this.RemoveQuestion);
             this.panel4.Controls.Add(this.AddQuestion);
             this.panel4.Controls.Add(this.ChangeQuestion);
-            this.panel4.Location = new System.Drawing.Point(275, 152);
+            this.panel4.Location = new System.Drawing.Point(206, 124);
+            this.panel4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel4.Name = "panel4";
-            this.panel4.Size = new System.Drawing.Size(331, 36);
+            this.panel4.Size = new System.Drawing.Size(248, 29);
             this.panel4.TabIndex = 37;
             // 
             // RemoveQuestion
             // 
             this.RemoveQuestion.AutoSize = true;
             this.RemoveQuestion.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.RemoveQuestion.Location = new System.Drawing.Point(128, 2);
+            this.RemoveQuestion.Location = new System.Drawing.Point(96, 2);
+            this.RemoveQuestion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.RemoveQuestion.Name = "RemoveQuestion";
-            this.RemoveQuestion.Size = new System.Drawing.Size(41, 31);
+            this.RemoveQuestion.Size = new System.Drawing.Size(34, 25);
             this.RemoveQuestion.TabIndex = 24;
             this.RemoveQuestion.TabStop = true;
             this.RemoveQuestion.Text = "-";
@@ -306,8 +323,9 @@
             this.AddQuestion.AutoSize = true;
             this.AddQuestion.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.AddQuestion.Location = new System.Drawing.Point(2, 2);
+            this.AddQuestion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.AddQuestion.Name = "AddQuestion";
-            this.AddQuestion.Size = new System.Drawing.Size(47, 31);
+            this.AddQuestion.Size = new System.Drawing.Size(39, 25);
             this.AddQuestion.TabIndex = 23;
             this.AddQuestion.TabStop = true;
             this.AddQuestion.Text = "+";
@@ -318,9 +336,10 @@
             // 
             this.ChangeQuestion.AutoSize = true;
             this.ChangeQuestion.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ChangeQuestion.Location = new System.Drawing.Point(216, 6);
+            this.ChangeQuestion.Location = new System.Drawing.Point(162, 5);
+            this.ChangeQuestion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ChangeQuestion.Name = "ChangeQuestion";
-            this.ChangeQuestion.Size = new System.Drawing.Size(99, 23);
+            this.ChangeQuestion.Size = new System.Drawing.Size(81, 20);
             this.ChangeQuestion.TabIndex = 25;
             this.ChangeQuestion.TabStop = true;
             this.ChangeQuestion.Text = "Изменить";
@@ -331,9 +350,10 @@
             // 
             this.EnumQuestions.AutoSize = true;
             this.EnumQuestions.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.EnumQuestions.Location = new System.Drawing.Point(197, 335);
+            this.EnumQuestions.Location = new System.Drawing.Point(148, 272);
+            this.EnumQuestions.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.EnumQuestions.Name = "EnumQuestions";
-            this.EnumQuestions.Size = new System.Drawing.Size(18, 19);
+            this.EnumQuestions.Size = new System.Drawing.Size(15, 16);
             this.EnumQuestions.TabIndex = 36;
             this.EnumQuestions.Text = "1";
             // 
@@ -341,9 +361,10 @@
             // 
             this.label13.AutoSize = true;
             this.label13.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label13.Location = new System.Drawing.Point(4, 335);
+            this.label13.Location = new System.Drawing.Point(3, 272);
+            this.label13.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(152, 19);
+            this.label13.Size = new System.Drawing.Size(126, 16);
             this.label13.TabIndex = 35;
             this.label13.Text = "Осталось вопросов:";
             // 
@@ -351,9 +372,10 @@
             // 
             this.EditQuestionButton.BackColor = System.Drawing.Color.DarkGray;
             this.EditQuestionButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.EditQuestionButton.Location = new System.Drawing.Point(432, 331);
+            this.EditQuestionButton.Location = new System.Drawing.Point(324, 269);
+            this.EditQuestionButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.EditQuestionButton.Name = "EditQuestionButton";
-            this.EditQuestionButton.Size = new System.Drawing.Size(174, 42);
+            this.EditQuestionButton.Size = new System.Drawing.Size(130, 34);
             this.EditQuestionButton.TabIndex = 34;
             this.EditQuestionButton.UseVisualStyleBackColor = false;
             this.EditQuestionButton.Click += new System.EventHandler(this.EditQuestionButton_Click);
@@ -361,36 +383,40 @@
             // textBox4
             // 
             this.textBox4.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox4.Location = new System.Drawing.Point(233, 335);
+            this.textBox4.Location = new System.Drawing.Point(175, 272);
+            this.textBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(184, 27);
+            this.textBox4.Size = new System.Drawing.Size(139, 23);
             this.textBox4.TabIndex = 33;
             this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
             // 
             // textBox3
             // 
             this.textBox3.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox3.Location = new System.Drawing.Point(432, 299);
+            this.textBox3.Location = new System.Drawing.Point(324, 243);
+            this.textBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(175, 27);
+            this.textBox3.Size = new System.Drawing.Size(132, 23);
             this.textBox3.TabIndex = 32;
             this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
             // 
             // textBox2
             // 
             this.textBox2.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox2.Location = new System.Drawing.Point(233, 302);
+            this.textBox2.Location = new System.Drawing.Point(175, 245);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(184, 27);
+            this.textBox2.Size = new System.Drawing.Size(139, 23);
             this.textBox2.TabIndex = 31;
             this.textBox2.TextChanged += new System.EventHandler(this.textBox2_TextChanged);
             // 
             // label6
             // 
             this.label6.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label6.Location = new System.Drawing.Point(3, 303);
+            this.label6.Location = new System.Drawing.Point(2, 246);
+            this.label6.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(245, 23);
+            this.label6.Size = new System.Drawing.Size(184, 19);
             this.label6.TabIndex = 30;
             this.label6.Text = "Остальные ответы:";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -398,18 +424,20 @@
             // textBox1
             // 
             this.textBox1.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.textBox1.Location = new System.Drawing.Point(432, 262);
+            this.textBox1.Location = new System.Drawing.Point(324, 213);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(175, 27);
+            this.textBox1.Size = new System.Drawing.Size(132, 23);
             this.textBox1.TabIndex = 29;
             this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label10
             // 
             this.label10.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label10.Location = new System.Drawing.Point(271, 263);
+            this.label10.Location = new System.Drawing.Point(203, 214);
+            this.label10.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(173, 23);
+            this.label10.Size = new System.Drawing.Size(130, 19);
             this.label10.TabIndex = 28;
             this.label10.Text = "Правильный ответ:";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -417,9 +445,10 @@
             // label9
             // 
             this.label9.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label9.Location = new System.Drawing.Point(271, 184);
+            this.label9.Location = new System.Drawing.Point(203, 150);
+            this.label9.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(336, 23);
+            this.label9.Size = new System.Drawing.Size(252, 19);
             this.label9.TabIndex = 27;
             this.label9.Text = "Вопрос";
             this.label9.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -427,10 +456,11 @@
             // EnterQuestion
             // 
             this.EnterQuestion.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.EnterQuestion.Location = new System.Drawing.Point(271, 210);
+            this.EnterQuestion.Location = new System.Drawing.Point(203, 171);
+            this.EnterQuestion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.EnterQuestion.Multiline = true;
             this.EnterQuestion.Name = "EnterQuestion";
-            this.EnterQuestion.Size = new System.Drawing.Size(336, 39);
+            this.EnterQuestion.Size = new System.Drawing.Size(253, 32);
             this.EnterQuestion.TabIndex = 26;
             this.EnterQuestion.TextChanged += new System.EventHandler(this.EnterQuestion_TextChanged);
             // 
@@ -438,10 +468,11 @@
             // 
             this.ListOfQuestions.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ListOfQuestions.FormattingEnabled = true;
-            this.ListOfQuestions.ItemHeight = 22;
-            this.ListOfQuestions.Location = new System.Drawing.Point(4, 183);
+            this.ListOfQuestions.ItemHeight = 19;
+            this.ListOfQuestions.Location = new System.Drawing.Point(3, 149);
+            this.ListOfQuestions.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ListOfQuestions.Name = "ListOfQuestions";
-            this.ListOfQuestions.Size = new System.Drawing.Size(244, 114);
+            this.ListOfQuestions.Size = new System.Drawing.Size(184, 80);
             this.ListOfQuestions.TabIndex = 22;
             this.ListOfQuestions.SelectedIndexChanged += new System.EventHandler(this.ListOfQuestions_SelectedIndexChanged);
             // 
@@ -449,10 +480,11 @@
             // 
             this.ListOfTests.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ListOfTests.FormattingEnabled = true;
-            this.ListOfTests.ItemHeight = 22;
-            this.ListOfTests.Location = new System.Drawing.Point(3, 54);
+            this.ListOfTests.ItemHeight = 19;
+            this.ListOfTests.Location = new System.Drawing.Point(2, 44);
+            this.ListOfTests.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ListOfTests.Name = "ListOfTests";
-            this.ListOfTests.Size = new System.Drawing.Size(245, 92);
+            this.ListOfTests.Size = new System.Drawing.Size(185, 61);
             this.ListOfTests.TabIndex = 11;
             this.ListOfTests.SelectedIndexChanged += new System.EventHandler(this.ListOfTests_SelectedIndexChanged);
             // 
@@ -460,9 +492,10 @@
             // 
             this.AddTest.AutoSize = true;
             this.AddTest.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.AddTest.Location = new System.Drawing.Point(271, 15);
+            this.AddTest.Location = new System.Drawing.Point(203, 12);
+            this.AddTest.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.AddTest.Name = "AddTest";
-            this.AddTest.Size = new System.Drawing.Size(47, 31);
+            this.AddTest.Size = new System.Drawing.Size(39, 25);
             this.AddTest.TabIndex = 14;
             this.AddTest.TabStop = true;
             this.AddTest.Text = "+";
@@ -472,9 +505,10 @@
             // label8
             // 
             this.label8.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label8.Location = new System.Drawing.Point(-1, 153);
+            this.label8.Location = new System.Drawing.Point(-1, 124);
+            this.label8.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(249, 27);
+            this.label8.Size = new System.Drawing.Size(187, 22);
             this.label8.TabIndex = 21;
             this.label8.Text = "Вопросы по тесту";
             this.label8.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -482,9 +516,10 @@
             // label5
             // 
             this.label5.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label5.Location = new System.Drawing.Point(-1, 9);
+            this.label5.Location = new System.Drawing.Point(-1, 7);
+            this.label5.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(249, 36);
+            this.label5.Size = new System.Drawing.Size(187, 29);
             this.label5.TabIndex = 10;
             this.label5.Text = "Все тесты";
             this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -493,9 +528,10 @@
             // 
             this.EditTestButton.BackColor = System.Drawing.Color.DarkGray;
             this.EditTestButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.EditTestButton.Location = new System.Drawing.Point(271, 110);
+            this.EditTestButton.Location = new System.Drawing.Point(203, 89);
+            this.EditTestButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.EditTestButton.Name = "EditTestButton";
-            this.EditTestButton.Size = new System.Drawing.Size(336, 38);
+            this.EditTestButton.Size = new System.Drawing.Size(252, 31);
             this.EditTestButton.TabIndex = 20;
             this.EditTestButton.UseVisualStyleBackColor = false;
             this.EditTestButton.Click += new System.EventHandler(this.EditTestButton_Click);
@@ -504,9 +540,10 @@
             // 
             this.RemoveTest.AutoSize = true;
             this.RemoveTest.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.RemoveTest.Location = new System.Drawing.Point(557, 14);
+            this.RemoveTest.Location = new System.Drawing.Point(418, 11);
+            this.RemoveTest.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.RemoveTest.Name = "RemoveTest";
-            this.RemoveTest.Size = new System.Drawing.Size(41, 31);
+            this.RemoveTest.Size = new System.Drawing.Size(34, 25);
             this.RemoveTest.TabIndex = 16;
             this.RemoveTest.TabStop = true;
             this.RemoveTest.Text = "-";
@@ -516,9 +553,10 @@
             // EnterTestName
             // 
             this.EnterTestName.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.EnterTestName.Location = new System.Drawing.Point(271, 81);
+            this.EnterTestName.Location = new System.Drawing.Point(203, 66);
+            this.EnterTestName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.EnterTestName.Name = "EnterTestName";
-            this.EnterTestName.Size = new System.Drawing.Size(336, 27);
+            this.EnterTestName.Size = new System.Drawing.Size(253, 23);
             this.EnterTestName.TabIndex = 19;
             this.EnterTestName.EnabledChanged += new System.EventHandler(this.EnterTestName_EnabledChanged);
             this.EnterTestName.TextChanged += new System.EventHandler(this.EnterTestName_TextChanged);
@@ -526,9 +564,10 @@
             // label7
             // 
             this.label7.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label7.Location = new System.Drawing.Point(271, 54);
+            this.label7.Location = new System.Drawing.Point(203, 44);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(336, 23);
+            this.label7.Size = new System.Drawing.Size(252, 19);
             this.label7.TabIndex = 18;
             this.label7.Text = "Наименование";
             this.label7.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -547,9 +586,10 @@
             this.panel3.Controls.Add(this.label11);
             this.panel3.Controls.Add(this.MathInformation);
             this.panel3.Controls.Add(this.ThemeName);
-            this.panel3.Location = new System.Drawing.Point(11, 444);
+            this.panel3.Location = new System.Drawing.Point(8, 361);
+            this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1259, 397);
+            this.panel3.Size = new System.Drawing.Size(944, 323);
             this.panel3.TabIndex = 17;
             this.panel3.MouseEnter += new System.EventHandler(this.panel3_MouseEnter);
             // 
@@ -557,9 +597,10 @@
             // 
             this.AddThemeButton.BackColor = System.Drawing.Color.DarkGray;
             this.AddThemeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 10.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.AddThemeButton.Location = new System.Drawing.Point(261, 128);
+            this.AddThemeButton.Location = new System.Drawing.Point(196, 104);
+            this.AddThemeButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.AddThemeButton.Name = "AddThemeButton";
-            this.AddThemeButton.Size = new System.Drawing.Size(261, 35);
+            this.AddThemeButton.Size = new System.Drawing.Size(196, 28);
             this.AddThemeButton.TabIndex = 37;
             this.AddThemeButton.Text = "Добавить";
             this.AddThemeButton.UseVisualStyleBackColor = false;
@@ -569,9 +610,10 @@
             // 
             this.EditThemeButton.BackColor = System.Drawing.Color.DarkGray;
             this.EditThemeButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 13.8F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.EditThemeButton.Location = new System.Drawing.Point(258, 180);
+            this.EditThemeButton.Location = new System.Drawing.Point(194, 146);
+            this.EditThemeButton.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.EditThemeButton.Name = "EditThemeButton";
-            this.EditThemeButton.Size = new System.Drawing.Size(264, 43);
+            this.EditThemeButton.Size = new System.Drawing.Size(198, 35);
             this.EditThemeButton.TabIndex = 36;
             this.EditThemeButton.UseVisualStyleBackColor = false;
             this.EditThemeButton.Click += new System.EventHandler(this.EditThemeButton_Click);
@@ -580,9 +622,10 @@
             // 
             this.AddTheme.AutoSize = true;
             this.AddTheme.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.AddTheme.Location = new System.Drawing.Point(264, 7);
+            this.AddTheme.Location = new System.Drawing.Point(198, 6);
+            this.AddTheme.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.AddTheme.Name = "AddTheme";
-            this.AddTheme.Size = new System.Drawing.Size(47, 31);
+            this.AddTheme.Size = new System.Drawing.Size(39, 25);
             this.AddTheme.TabIndex = 33;
             this.AddTheme.TabStop = true;
             this.AddTheme.Text = "+";
@@ -593,9 +636,10 @@
             // 
             this.RemoveTheme.AutoSize = true;
             this.RemoveTheme.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.RemoveTheme.Location = new System.Drawing.Point(337, 5);
+            this.RemoveTheme.Location = new System.Drawing.Point(253, 4);
+            this.RemoveTheme.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.RemoveTheme.Name = "RemoveTheme";
-            this.RemoveTheme.Size = new System.Drawing.Size(41, 31);
+            this.RemoveTheme.Size = new System.Drawing.Size(34, 25);
             this.RemoveTheme.TabIndex = 34;
             this.RemoveTheme.TabStop = true;
             this.RemoveTheme.Text = "-";
@@ -606,9 +650,10 @@
             // 
             this.EditTheme.AutoSize = true;
             this.EditTheme.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.EditTheme.Location = new System.Drawing.Point(416, 10);
+            this.EditTheme.Location = new System.Drawing.Point(312, 8);
+            this.EditTheme.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.EditTheme.Name = "EditTheme";
-            this.EditTheme.Size = new System.Drawing.Size(99, 23);
+            this.EditTheme.Size = new System.Drawing.Size(81, 20);
             this.EditTheme.TabIndex = 35;
             this.EditTheme.TabStop = true;
             this.EditTheme.Text = "Изменить";
@@ -618,9 +663,10 @@
             // label12
             // 
             this.label12.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label12.Location = new System.Drawing.Point(261, 42);
+            this.label12.Location = new System.Drawing.Point(196, 34);
+            this.label12.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(261, 36);
+            this.label12.Size = new System.Drawing.Size(196, 29);
             this.label12.TabIndex = 32;
             this.label12.Text = "Наименование";
             this.label12.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -628,9 +674,10 @@
             // label4
             // 
             this.label4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label4.Location = new System.Drawing.Point(8, 3);
+            this.label4.Location = new System.Drawing.Point(6, 2);
+            this.label4.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(190, 36);
+            this.label4.Size = new System.Drawing.Size(142, 29);
             this.label4.TabIndex = 31;
             this.label4.Text = "Все темы";
             this.label4.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -639,19 +686,21 @@
             // 
             this.ListOfThemes.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ListOfThemes.FormattingEnabled = true;
-            this.ListOfThemes.ItemHeight = 22;
-            this.ListOfThemes.Location = new System.Drawing.Point(8, 42);
+            this.ListOfThemes.ItemHeight = 19;
+            this.ListOfThemes.Location = new System.Drawing.Point(6, 34);
+            this.ListOfThemes.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.ListOfThemes.Name = "ListOfThemes";
-            this.ListOfThemes.Size = new System.Drawing.Size(241, 334);
+            this.ListOfThemes.Size = new System.Drawing.Size(182, 270);
             this.ListOfThemes.TabIndex = 30;
             this.ListOfThemes.SelectedIndexChanged += new System.EventHandler(this.ListOfThemes_SelectedIndexChanged);
             // 
             // label11
             // 
             this.label11.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.label11.Location = new System.Drawing.Point(529, 9);
+            this.label11.Location = new System.Drawing.Point(397, 7);
+            this.label11.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(706, 30);
+            this.label11.Size = new System.Drawing.Size(530, 24);
             this.label11.TabIndex = 29;
             this.label11.Text = "Информация по теме";
             this.label11.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -662,9 +711,9 @@
             // 
             // FormForAdmin
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1282, 853);
+            this.ClientSize = new System.Drawing.Size(962, 693);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -673,8 +722,10 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.HelpButton = true;
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(978, 732);
             this.Name = "FormForAdmin";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Меню администратора";
