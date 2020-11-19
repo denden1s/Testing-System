@@ -649,7 +649,7 @@ namespace testing_system.Classes
         /// <param name="_selectedQuestionId">Индекс выбранного вопроса в ListBox-e</param>
         /// <param name="_answersAndName">Наименования вопроса и ответы</param>
         public static void Edit(List<QuestionAndAnswer> _questionsList,
-            int _selectedQuestionId, params string[] _answersAndName )
+            int _selectedQuestionId,List<QuestionName> _qNamesList, params string[] _answersAndName)
         {
             try
             {
@@ -691,6 +691,7 @@ namespace testing_system.Classes
                             itemForUpdate.WrongAnswer_2 = _answersAndName[2];
                             itemForUpdate.WrongAnswer_3 = _answersAndName[3];
                             db.questionNames.Update(questionNameItem);
+                            _qNamesList[_selectedQuestionId].Name = questionNameItem.Name;
                             db.questionAndAnswers.Update(itemForUpdate);
                             db.SaveChanges();       
                             MessageBox.Show("Вопрос обновлен");                           

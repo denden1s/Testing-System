@@ -30,7 +30,11 @@ namespace testing_system
         /// </summary>
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=testing_system_db;Trusted_Connection=True;");
+            if(!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer("Server=(localdb)" +
+                    "\\mssqllocaldb;Database=testing_system_db;Trusted_Connection=True;");
+            }
         }
 
         /// <summary>

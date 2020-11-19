@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using testing_system.Classes;
+﻿using testing_system.Classes;
 
 namespace testing_system
 {
-    /// <summary>
-    /// Класс необходим для представления информации из БД в виде объектов
-    /// </summary>
+
     public class User
     {
         private Encryption encryption = new Encryption();

@@ -25,10 +25,6 @@ namespace testing_system
         private List<TestName> TestNames;
         private List<InformationAboutMath> MathematicInfo;
 
-
-        /// <summary>
-        /// Конструктор для создания формы
-        /// </summary>
         public FormForUser()
         {  
             InitializeComponent();
@@ -79,6 +75,7 @@ namespace testing_system
             LabelForComboBox.Visible = true;
             comboBox1.Visible = true;
             TBInformation.Visible = true;
+            TBInformation.ReadOnly = false;
             TBInformation.Clear();
             comboBox1.Items.Clear();
             comboBox1.Text = "";
@@ -146,6 +143,7 @@ namespace testing_system
         /// </summary>
         private void статистикаТестовToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            TBInformation.ReadOnly = true;
             TBInformation.Visible = true;
             themeIsSelect = false;
             ChooseElement.Visible = false;

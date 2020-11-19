@@ -1,20 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using Microsoft.EntityFrameworkCore;
 using testing_system.Classes;
 
 namespace testing_system
 {
-    /// <summary>
-    /// Класс необходим для организации формы
-    /// </summary>
     public partial class AuthorizationForm : Form
     {
 
@@ -29,9 +21,6 @@ namespace testing_system
 
         private List<User> Users;
         
-        /// <summary>
-        /// Конструктор формы
-        /// </summary>
         public AuthorizationForm()
         {
             logIn = false;
@@ -53,9 +42,6 @@ namespace testing_system
             InitializeComponent();
         }
 
-        /// <summary>
-        /// Метод необходим для входа пользователя в систему
-        /// </summary>
         private void button1_Click(object sender, EventArgs e)
         {
             foreach (User us in Users)
@@ -75,22 +61,18 @@ namespace testing_system
                         {
                             formForAdmin = new FormForAdmin();
                             formForAdmin.Show();
-                            //this.Visible = false;
                             //создание формы для администратора
                             this.Hide();
                         }
                         else
                         {
-                            formForUser = new FormForUser(itemUpdate);//нужно передавать авторизированного пользователя
+                            formForUser = new FormForUser(itemUpdate);
                             formForUser.Show();
                             this.Hide();
-                            //this.Visible = false;
                         }
                     }
                     break;
                 }
-                //else
-                //    MessageBox.Show("Неверный логин или пароль!");
             }
             if (!logIn)
             {
@@ -98,22 +80,43 @@ namespace testing_system
             }
         }
 
-        /// <summary>
-        /// Метод нужен для выполнения действий при загрузке формы
-        /// </summary>
+
         private void Form1_Load(object sender, EventArgs e)
         {
             EnterLogin.Text = "";
             EnterPassword.Text = "";
             this.Text = "Меню авторизации";
+            button1.Enabled = false;
+            button1.BackColor = Color.DarkGray;
         }
 
-        /// <summary>
-        /// Метод нужен для закрытия программы полностью
-        /// </summary>
         private void Form1_FormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
+        }
+
+        private void EnterPassword_TextChanged(object sender, EventArgs e)
+        {
+            ChangeButton();
+        }
+
+        private void ChangeButton()
+        {
+            if((EnterLogin.TextLength > 0) && (EnterPassword.TextLength > 0))
+            {
+                button1.BackColor = Color.LimeGreen;
+                button1.Enabled = true;
+            }
+            else
+            {
+                button1.BackColor = Color.DarkGray;
+                button1.Enabled = false;
+            }
+        }
+
+        private void EnterLogin_TextChanged(object sender, EventArgs e)
+        {
+            ChangeButton();
         }
     }
 }

@@ -1,20 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using testing_system.Classes;
 using testing_system.Classes.ForDataBase;
 
 namespace testing_system
 {
-
     public partial class TestingForm : Form
     {
         //Необходимы для передачи информации о пользователе и 

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AuthorizationForm));
             this.button1 = new System.Windows.Forms.Button();
             this.EnterLogin = new System.Windows.Forms.TextBox();
             this.EnterPassword = new System.Windows.Forms.TextBox();
@@ -53,6 +54,7 @@
             this.EnterLogin.Name = "EnterLogin";
             this.EnterLogin.Size = new System.Drawing.Size(470, 34);
             this.EnterLogin.TabIndex = 1;
+            this.EnterLogin.TextChanged += new System.EventHandler(this.EnterLogin_TextChanged);
             // 
             // EnterPassword
             // 
@@ -62,6 +64,7 @@
             this.EnterPassword.PasswordChar = '*';
             this.EnterPassword.Size = new System.Drawing.Size(470, 34);
             this.EnterPassword.TabIndex = 2;
+            this.EnterPassword.TextChanged += new System.EventHandler(this.EnterPassword_TextChanged);
             // 
             // label1
             // 
@@ -86,7 +89,7 @@
             this.label2.TabIndex = 4;
             this.label2.Text = "Пароль:";
             // 
-            // Form1
+            // AuthorizationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -97,9 +100,10 @@
             this.Controls.Add(this.EnterLogin);
             this.Controls.Add(this.button1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
-            this.Name = "Form1";
+            this.Name = "AuthorizationForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Меню авторизации";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form1_FormClosed);

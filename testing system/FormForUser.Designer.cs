@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormForUser));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.учебнаяИнформацияToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.тестыToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -87,7 +88,7 @@
             // 
             this.ChooseElement.AutoSize = true;
             this.ChooseElement.Font = new System.Drawing.Font("Times New Roman", 19.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.ChooseElement.Location = new System.Drawing.Point(175, 258);
+            this.ChooseElement.Location = new System.Drawing.Point(151, 262);
             this.ChooseElement.Name = "ChooseElement";
             this.ChooseElement.Size = new System.Drawing.Size(632, 37);
             this.ChooseElement.TabIndex = 2;
@@ -119,7 +120,6 @@
             this.TBInformation.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.TBInformation.Location = new System.Drawing.Point(12, 74);
             this.TBInformation.Name = "TBInformation";
-            this.TBInformation.ReadOnly = true;
             this.TBInformation.Size = new System.Drawing.Size(891, 467);
             this.TBInformation.TabIndex = 5;
             this.TBInformation.Text = "";
@@ -148,6 +148,7 @@
             this.Controls.Add(this.TBInformation);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.HelpButton = true;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
             this.MinimizeBox = false;

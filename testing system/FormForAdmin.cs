@@ -562,7 +562,7 @@ namespace testing_system
             {
                 if (ListOfQuestions.SelectedIndex != -1)
                 {
-                    SystemFunctions.Edit(QuestionAndAnswers, ListOfQuestions.SelectedIndex,
+                    SystemFunctions.Edit(QuestionAndAnswers, ListOfQuestions.SelectedIndex, QuestionNames,
                    textBox1.Text, textBox2.Text, textBox3.Text, textBox4.Text, EnterQuestion.Text);
                     ListOfQuestions.Items.Clear();
                     foreach (var item in QuestionNames)
@@ -804,17 +804,19 @@ namespace testing_system
 
         private void EnterUserName_TextChanged(object sender, EventArgs e)
         {
-            if ((EnterUserName.TextLength > 2) && (EnterPassword.TextLength > 0))
+            if(AddUser.Checked)
             {
-                EditUserButton.Enabled = true;
-                ButtonAdd(EditUserButton);
+                if ((EnterUserName.TextLength > 2) && (EnterPassword.TextLength > 0))
+                {
+                    EditUserButton.Enabled = true;
+                    ButtonAdd(EditUserButton);
+                }
+                else
+                {
+                    EditUserButton.BackColor = Color.DarkGray;
+                    EditUserButton.Enabled = false;
+                }
             }
-            else
-            {
-                EditUserButton.BackColor = Color.DarkGray;
-                EditUserButton.Enabled = false;
-            }
-
         }
 
         private void EnterPassword_TextChanged(object sender, EventArgs e)
