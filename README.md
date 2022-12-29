@@ -9,7 +9,7 @@
       <img src="https://i.ibb.co/HFgvLc4/t1.png" width="auto">
 </p>
 <p align="center">
-      <img src="https://i.ibb.co/7XZL3QZ/t2.png" width="auto">
+      <img src="https://i.ibb.co/P9hSrVK/t2.png" width="auto">
 </p>
 <p align="center">
      <img src="https://i.ibb.co/6nxnyZ8/t3.jpg" width="auto">
